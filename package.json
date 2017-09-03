@@ -1,0 +1,31 @@
+{
+  "name": "design-system",
+  "version": "0.0.0",
+  "description": "JS design system helpers",
+  "main": "src/index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d dist",
+    "postinstall": "npm run build"
+  },
+  "keywords": [
+    "css-in-js",
+    "glamourous",
+    "styled-components",
+    "emotion",
+    "CSS"
+  ],
+  "author": "Zander Martineau",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0"
+  },
+  "dependencies": {
+    "modularscale-js": "^3.0.1",
+    "object-get": "^2.1.0"
+  }
+}
