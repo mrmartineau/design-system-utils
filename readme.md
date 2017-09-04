@@ -1,5 +1,5 @@
 <h1 align="center">
-  design-system
+  design-system-utils
 
   [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
   ![](https://img.shields.io/badge/licence-MIT-blue.svg?style=flat-square)
@@ -10,23 +10,21 @@
 
 Maintaining styling consistency in a web app is always tough. This micro framework aims to standardise your design-system and provide helpful utilities to access it's information.
 
-Maintained by [Zander Martineau](https://github.com/mrmartineau)
-
 ## Install
 ```sh
-npm i --save design-system
+npm i --save design-system-utils
 
-yarn add design-system
+yarn add design-system-utils
 ```
 
 ## Usage
 Create your design system file, this contains all your global variables that your app will use, think font-sizes, color palette etc.
 
-### Setup your design system
-This is an excerpt from the example directory
+## Setup your design system
+This is an excerpt from the example design-system. See a more complete example in the [example](example/myDesignSystem.js) directory.
 
 ```js
-const myDesignSystem = {
+export const myDesignSystem = {
   settings: {
     useModularScale: true,
   },
@@ -58,8 +56,6 @@ const myDesignSystem = {
       mono: 'Menlo, Monaco, "Courier New", monospace',
     },
 
-    // font-family-base: ko-font(system),
-    // font-family-headings: ko-font(serif),
     lineHeight: {
       headings: 1.1,
     },
@@ -73,24 +69,36 @@ const myDesignSystem = {
 }
 ```
 
-### Initialise the design system framework
+## Initialise the design system framework
 ```js
+// myDesignSystem.js
 import DesignSystem from 'design-system'
-import myDesignSystem from './myDesignSystem' // this is just an plain old javascript object
-
+export const myDesignSystem {...} // your design-system goes here
 export const ds = new DesignSystem(myDesignSystem)
 ```
 
-### Get some values
-
+## Import the design system into your component file
 ```js
-// with the system setup, as above
-ds.getFontSize('xl') // 45 - we are using modular-scale to calculate sizes
-ds.getValue('type.baseFontSize')
+import { ds } from './myDesignSystem'
 ```
 
-#### Color palette
-The color palette needs
+## Get some values
+The `ds.getValue()` function can be used to get any value from the design-system. Use dot notation to find the value you need.
+```js
+// with the system setup, as above
+ds.getValue('type.baseFontSize') // 20px
+```
+
+I have provided a few other helper methods to make finding certain values more simple.
+### Get font-sizes
+The `ds.getFontSize()` method is a short-hand for the `ds.getValue()` method. It can be used to get a breakpoint from the `type.sizes` object.
+```js
+ds.getFontSize('xl') // 45 - we are using modular-scale to calculate sizes
+```
+
+### Color palette
+The `ds.getColor()` function gets values from the `colorPalette` object. It assumes every color has a `base` property and other properties for different shades of the same color.
+This is a short-hand for the `ds.getValue()` function.
 ```js
 // With a color palette like this:
 const colorPalette = {
@@ -108,42 +116,39 @@ const colorPalette = {
 }
 
 // Get values like this:
-ds.getColor('primary') // the `base` key is the default, so it is not needed
-ds.getColor('primary', 'dark')
+ds.getColor('bright') // #F9FAFB - the `base` key is the default, so it is not needed
+ds.getColor('bright', 'dark')
 ```
 
-#### Responsive Breakpoints
-This is a short-hand for the `ds.getValue()` function
+### Responsive Breakpoints
+The `ds.getBreakpoint()` method is a short-hand for the `ds.getValue()` method. It can be used to get a breakpoint from the `breakpoints` object.
 ```js
 ds.getBreakpoint('m')
 ```
 
-#### Responsive Breakpoints
-This is a short-hand for the `ds.getValue()` function
-```js
-ds.getBreakpoint('m')
-```
-
-#### `z-index`
-This is a short-hand for the `ds.getValue()` function
+### `z-index`
+The `ds.getZIndex()` method is a short-hand for the `ds.getValue()` method. It can be used to get a breakpoint from the `zIndex` object.
 ```js
 ds.getZIndex('low')
 ```
 
-#### Calculations
-The framework currently provides a few calculation function, `multiply` and `pxTo`:
+### Calculations
+The framework currently provides a few calculation functions, `multiply` and `pxTo`:
 
-##### `multiply`
+#### `multiply`
 ```js
-ds.multiply(10, 2)
+ds.multiply(10, 2) // 20
 ds.multiply(ds.getValue('spacing.baseline'), 2)
 ```
 
-##### `pxTo`
+#### `pxTo`
+Converts `px` to `rem` or `em
 ```js
 ds.pxTo(12, 20, 'rem') // 0.6rem
+ds.pxTo(12, 20, 'em') // 0.6em
 ```
 
+> Made by [ZΛNDΞR :zap:](https://github.com/mrmartineau/)
 
 
 

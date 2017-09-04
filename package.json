@@ -1,7 +1,7 @@
 {
-  "name": "design-system",
-  "version": "0.0.0",
-  "description": "JS design system helpers",
+  "name": "design-system-utils",
+  "version": "0.0.1",
+  "description": "Design-system utils for working with JS-in-CSS",
   "main": "src/index.js",
   "directories": {
     "example": "example"
@@ -13,7 +13,7 @@
   },
   "keywords": [
     "css-in-js",
-    "glamourous",
+    "glamorous",
     "styled-components",
     "emotion",
     "CSS"
