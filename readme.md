@@ -148,6 +148,9 @@ ds.pxTo(12, 20, 'rem') // 0.6rem
 ds.pxTo(12, 20, 'em') // 0.6em
 ```
 
+## Demo & examples
+I created a demo on [codesandbox.io](https://codesandbox.io/s/qkloonj87w), it includes examples of using the design-system utils with [emotion](https://emotion.sh/), [styled-components](https://www.styled-components.com/) and [glamorous](https://glamorous.rocks). There is also a basic example [here](example/).
+
 > Made by [ZΛNDΞR :zap:](https://github.com/mrmartineau/)
 
 
