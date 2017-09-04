@@ -1,6 +1,7 @@
 import colorPalette from './colorPalette'
+import DesignSystem from '../src'
 
-export default {
+export const myDesignSystem = {
   settings: {
     useModularScale: true,
     fontSizeUnit: 'rem',
@@ -32,7 +33,6 @@ export default {
       mono: 'Menlo, Monaco, "Courier New", monospace',
     },
 
-    // FIXME: how to access the above 2 properties
     // font-family-base: ko-font(system),
     // font-family-headings: ko-font(serif),
     lineHeight: {
@@ -62,11 +62,12 @@ export default {
 
   spacing: {
     baseline: 20,
-    padding: '5px',
+    padding: '0.3em',
+    scale: [0, 8, 16, 24, 32, 40],
   },
 
   layout: {
-    gutter: '',
+    gutter: 20,
     maxWidth: 1200,
     grid: {
       columnCount: 12,
@@ -77,10 +78,13 @@ export default {
     default: {
       duration: '300ms',
       timing: 'cubic-bezier(0.77, 0, 0.175, 1)',
-      // FIXME: how to access the above 2 properties
       transition: 'all $default-transition-duration $default-transition-timing',
     },
   },
 
   animation: {},
+
+  borderRadius: '0.3em',
 }
+
+export const ds = new DesignSystem(myDesignSystem)

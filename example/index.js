@@ -1,28 +1,58 @@
-import DesignSystem from '../src'
-import myDesignSystem from './myDesignSystem'
+import React from 'react'
+import { render } from 'react-dom'
 
-const ds = new DesignSystem(myDesignSystem)
+// import the design-system
+import { ds } from './myDesignSystem'
 
-// Colors
-console.log('ds:getColor', ds.getColor('primary'))
-console.log('ds:getColor', ds.getColor('primary'))
+// We can use styled-components or glamorous
+import styled from 'styled-components'
+import glamorous from 'glamorous'
 
+// Create some components
+const StyledHeading = styled.h2`
+  color: ${ds.getColor('dark')};
+  font-size: ${ds.getFontSize('l')};
+  font-family: ${ds.getValue('type.fontFamily.system')};
+`
 
-// Typography
-console.log('ds:getFontSize', ds.getFontSize('xl'))
-console.log('ds:base font size', ds.getValue('type.baseFontSize'))
+const StyledButton = styled.button`
+  background-color: ${ds.getColor('secondary')};
+  border: 0;
+  border-radius: ${ds.getValue('borderRadius')};
+  padding: ${ds.getValue('spacing.padding')};
+  color: ${ds.getColor('bright')};
+  font-size: ${ds.getFontSize('l')};
+  &:hover {
+		background-color: ${ds.getColor('secondary', 'dark')};
 
-// Calcs
-console.log('ds:multiply', ds.multiply(10, 2))
+	}
+`
 
-// Breakpoints
-console.log('ds:getBreakpoint', ds.getBreakpoint('m'))
+const GlamorousHeading = glamorous.h2({
+  color: ds.getColor('dark'),
+  fontSize: ds.getFontSize('l'),
+  fontFamily: ds.getValue('type.fontFamily.system'),
+})
 
-// Z-index
-console.log('ds:getZIndex', ds.getZIndex('low'))
+const GlamorousButton = glamorous.button({
+  backgroundColor: ds.getColor('primary'),
+  border: 0,
+  borderRadius: ds.getValue('borderRadius'),
+  padding: ds.getValue('spacing.padding'),
+  color: ds.getColor('bright'),
+  fontSize: ds.getFontSize('l'),
+  ':hover': {
+    backgroundColor: ds.getColor('primary', 'light'),
+  },
+})
 
+const App = () =>
+  <div>
+    <StyledHeading>With Styled Components</StyledHeading>
+    <StyledButton>Please click me</StyledButton>
+    <br />
+    <GlamorousHeading>With Glamorous</GlamorousHeading>
+    <GlamorousButton>Please click me</GlamorousButton>
+  </div>
 
-console.log(
-  'ds:multiply spacing',
-  ds.multiply(ds.getValue('spacing.baseline'), 105),
-)
+render(<App />, document.getElementById('root'))
