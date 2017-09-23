@@ -1,21 +1,23 @@
 {
   "name": "design-system-utils",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Design-system utils for working with JS-in-CSS",
-  "main": "src/index.js",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
   "directories": {
     "example": "example"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src -d dist",
-    "postinstall": "npm run build"
+    "build": "babel src -d cjs",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "css-in-js",
     "glamorous",
     "styled-components",
     "emotion",
+    "styled-jsx",
     "CSS"
   ],
   "author": "Zander Martineau",
