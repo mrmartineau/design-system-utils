@@ -1,7 +1,7 @@
 import getColor from './getColor'
 import getValue from './getValue'
 import { multiply, pxTo } from './calcs'
-import ms from 'modularscale-js'  
+import ms from 'modularscale-js'
 
 export default class DesignSystem {
   constructor(system) {
@@ -40,5 +40,9 @@ export default class DesignSystem {
       default:
         return `${output}px`
     }
+  }
+
+  getSpacing(index = 0) {
+    return `${this.designSystem.spacing.scale[index]}px`;
   }
 }

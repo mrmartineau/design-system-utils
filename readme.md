@@ -132,6 +132,15 @@ The `ds.getZIndex()` method is a short-hand for the `ds.getValue()` method. It c
 ds.getZIndex('low')
 ```
 
+### Spacing
+The `ds.getSpacing()` method returns a value from your `spacing.scale` array. It takes an index for that array and converts the value to pixels.
+```js
+// Example scale array
+// scale: [0, 8, 16, 24, 32, 40]
+
+ds.getSpacing(2) // '16px'
+```
+
 ### Calculations
 The framework currently provides a few calculation functions, `multiply` and `pxTo`:
 
@@ -152,6 +161,3 @@ ds.pxTo(12, 20, 'em') // 0.6em
 I created a demo on [codesandbox.io](https://codesandbox.io/s/qkloonj87w), it includes examples of using the design-system utils with [emotion](https://emotion.sh/), [styled-components](https://www.styled-components.com/) and [glamorous](https://glamorous.rocks). There is also a basic example [here](example/).
 
 > Made by [ZΛNDΞR :zap:](https://github.com/mrmartineau/)
-
-
-
