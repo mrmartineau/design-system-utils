@@ -23,8 +23,8 @@ export default class DesignSystem {
     return get(this.designSystem.zIndex, z)
   }
 
-  getFontSize(size) {
-    const value = getValue(this.designSystem.type.sizes, size)
+  fontSize(size) {
+    const value = get(this.designSystem.type.sizes, size)
     let output
     if (this.designSystem.settings.useModularScale) {
       output = ms(value, this.designSystem.type.modularscale)
@@ -42,7 +42,11 @@ export default class DesignSystem {
     }
   }
 
-  getSpacing(index = 0) {
+  fs(size) {
+    return this.fontSize(size)
+  }
+
+  spacing(index = 0) {
     return `${this.designSystem.spacing.scale[index]}px`;
   }
 }

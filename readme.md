@@ -91,9 +91,10 @@ ds.getValue('type.baseFontSize') // 20px
 
 I have provided a few other helper methods to make finding certain values more simple.
 ### Get font-sizes
-The `ds.getFontSize()` method is a short-hand for the `ds.getValue()` method. It can be used to get a breakpoint from the `type.sizes` object.
+The `ds.fontSize()` method is a short-hand for the `ds.get()` method. It can be used to get a breakpoint from the `type.sizes` object.
 ```js
-ds.getFontSize('xl') // 45 - we are using modular-scale to calculate sizes
+ds.fontSize('xl') // 45 - we are using modular-scale to calculate sizes
+ds.fs('xl') // same as above 45 - we are using modular-scale to calculate sizes
 ```
 
 ### Color palette
@@ -133,12 +134,12 @@ ds.z('low')
 ```
 
 ### Spacing
-The `ds.getSpacing()` method returns a value from your `spacing.scale` array. It takes an index for that array and converts the value to pixels.
+The `ds.spacing()` method returns a value from your `spacing.scale` array. It takes an index for that array and converts the value to pixels.
 ```js
 // Example scale array
 // scale: [0, 8, 16, 24, 32, 40]
 
-ds.getSpacing(2) // '16px'
+ds.spacing(2) // '16px'
 ```
 
 ### Calculations
