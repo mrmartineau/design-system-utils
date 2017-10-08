@@ -5,51 +5,52 @@ import { render } from 'react-dom'
 import { ds } from './myDesignSystem'
 
 // We can use styled-components or glamorous
-import styled from 'styled-components'
 import glamorous from 'glamorous'
+import styled from 'react-emotion'
 
 // Create some components
-const StyledHeading = styled.h2`
-  color: ${ds.getColor('dark')};
-  font-size: ${ds.getFontSize('l')};
-  font-family: ${ds.getValue('type.fontFamily.system')};
+
+const EmotionHeading = styled('h2')`
+  color: ${ds.color('dark')};
+  font-size: ${ds.fontSize('l')};
+  font-family: ${ds.get('type.fontFamily.system')};
 `
 
-const StyledButton = styled.button`
-  background-color: ${ds.getColor('secondary')};
+const EmotionButton = styled('button')`
+  background-color: ${ds.color('secondary')};
   border: 0;
-  border-radius: ${ds.getValue('borderRadius')};
-  padding: ${ds.getValue('spacing.padding')};
-  color: ${ds.getColor('bright')};
-  font-size: ${ds.getFontSize('l')};
+  border-radius: ${ds.get('borderRadius')};
+  padding: ${ds.get('spacing.padding')};
+  color: ${ds.color('bright')};
+  font-size: ${ds.fontSize('l')};
   &:hover {
-		background-color: ${ds.getColor('secondary', 'dark')};
+		background-color: ${ds.color('secondary', 'dark')};
 
 	}
 `
 
 const GlamorousHeading = glamorous.h2({
-  color: ds.getColor('dark'),
-  fontSize: ds.getFontSize('l'),
-  fontFamily: ds.getValue('type.fontFamily.system'),
+  color: ds.color('dark'),
+  fontSize: ds.fontSize('l'),
+  fontFamily: ds.get('type.fontFamily.system'),
 })
 
 const GlamorousButton = glamorous.button({
-  backgroundColor: ds.getColor('primary'),
+  backgroundColor: ds.color('primary'),
   border: 0,
-  borderRadius: ds.getValue('borderRadius'),
-  padding: ds.getValue('spacing.padding'),
-  color: ds.getColor('bright'),
-  fontSize: ds.getFontSize('l'),
+  borderRadius: ds.get('borderRadius'),
+  padding: ds.get('spacing.padding'),
+  color: ds.color('bright'),
+  fontSize: ds.fontSize('l'),
   ':hover': {
-    backgroundColor: ds.getColor('primary', 'light'),
+    backgroundColor: ds.color('primary', 'light'),
   },
 })
 
 const App = () =>
   <div>
-    <StyledHeading>With Styled Components</StyledHeading>
-    <StyledButton>Please click me</StyledButton>
+    <EmotionHeading>With Styled Components</EmotionHeading>
+    <EmotionButton>Please click me</EmotionButton>
     <br />
     <GlamorousHeading>With Glamorous</GlamorousHeading>
     <GlamorousButton>Please click me</GlamorousButton>
