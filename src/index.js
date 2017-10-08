@@ -19,8 +19,8 @@ export default class DesignSystem {
     return get(this.designSystem.breakpoints, bp)
   }
 
-  getZIndex(z) {
-    return getValue(this.designSystem.zIndex, z)
+  z(z) {
+    return get(this.designSystem.zIndex, z)
   }
 
   getFontSize(size) {

@@ -127,9 +127,9 @@ ds.bp('m')
 ```
 
 ### `z-index`
-The `ds.getZIndex()` method is a short-hand for the `ds.getValue()` method. It can be used to get a breakpoint from the `zIndex` object.
+The `ds.z()` method is a short-hand for the `ds.get()` method. It can be used to get a breakpoint from the `zIndex` object.
 ```js
-ds.getZIndex('low')
+ds.z('low')
 ```
 
 ### Spacing
