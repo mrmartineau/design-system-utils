@@ -83,10 +83,10 @@ import { ds } from './myDesignSystem'
 ```
 
 ## Get some values
-The `ds.getValue()` function can be used to get any value from the design-system. Use dot notation to find the value you need.
+The `ds.get()` function can be used to get any value from the design-system. Use dot notation to find the value you need.
 ```js
 // with the system setup, as above
-ds.getValue('type.baseFontSize') // 20px
+ds.get('type.baseFontSize') // 20px
 ```
 
 I have provided a few other helper methods to make finding certain values more simple.
@@ -98,8 +98,8 @@ ds.fs('xl') // same as above 45 - we are using modular-scale to calculate sizes
 ```
 
 ### Color palette
-The `ds.getColor()` function gets values from the `colorPalette` object. It assumes every color has a `base` property and other properties for different shades of the same color.
-This is a short-hand for the `ds.getValue()` function.
+The `ds.color()` function gets values from the `colorPalette` object. It assumes every color has a `base` property and other properties for different shades of the same color.
+This is a short-hand for the `ds.get()` function.
 ```js
 // With a color palette like this:
 const colorPalette = {
@@ -117,8 +117,8 @@ const colorPalette = {
 }
 
 // Get values like this:
-ds.getColor('bright') // #F9FAFB - the `base` key is the default, so it is not needed
-ds.getColor('bright', 'dark')
+ds.color('bright') // #F9FAFB - the `base` key is the default, so it is not needed
+ds.color('bright', 'dark')
 ```
 
 ### Responsive Breakpoints
@@ -148,7 +148,7 @@ The framework currently provides a few calculation functions, `multiply` and `px
 #### `multiply`
 ```js
 ds.multiply(10, 2) // 20
-ds.multiply(ds.getValue('spacing.baseline'), 2)
+ds.multiply(ds.get('spacing.baseline'), 2)
 ```
 
 #### `pxTo`
