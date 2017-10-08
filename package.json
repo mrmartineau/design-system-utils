@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Design-system utils for working with JS-in-CSS",
   "main": "./cjs/index.js",
-  "module": "./esm/index.js",
+  "module": "./src/index.js",
   "directories": {
     "example": "example"
   },
