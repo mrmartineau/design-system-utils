@@ -1,5 +1,5 @@
-import getValue from './getValue'
 import color from './color'
+import get from './get'
 import { multiply, pxTo } from './calcs'
 import ms from 'modularscale-js'
 
@@ -11,8 +11,8 @@ export default class DesignSystem {
     this.pxTo = pxTo
   }
 
-  getValue(val) {
-    return getValue(this.designSystem, val)
+  get(val) {
+    return get(this.designSystem, val)
   }
 
   getBreakpoint(bp) {
