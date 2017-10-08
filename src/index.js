@@ -15,8 +15,8 @@ export default class DesignSystem {
     return get(this.designSystem, val)
   }
 
-  getBreakpoint(bp) {
-    return getValue(this.designSystem.breakpoints, bp)
+  bp(bp) {
+    return get(this.designSystem.breakpoints, bp)
   }
 
   getZIndex(z) {

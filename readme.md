@@ -121,9 +121,9 @@ ds.getColor('bright', 'dark')
 ```
 
 ### Responsive Breakpoints
-The `ds.getBreakpoint()` method is a short-hand for the `ds.getValue()` method. It can be used to get a breakpoint from the `breakpoints` object.
+The `ds.bp()` method is a short-hand for the `ds.get()` method. It can be used to get a breakpoint from the `breakpoints` object.
 ```js
-ds.getBreakpoint('m')
+ds.bp('m')
 ```
 
 ### `z-index`
