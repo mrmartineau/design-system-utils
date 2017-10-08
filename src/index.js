@@ -1,12 +1,12 @@
-import getColor from './getColor'
 import getValue from './getValue'
+import color from './color'
 import { multiply, pxTo } from './calcs'
 import ms from 'modularscale-js'
 
 export default class DesignSystem {
   constructor(system) {
     this.designSystem = system
-    this.getColor = getColor(system.colorPalette)
+    this.color = color(system.colorPalette)
     this.multiply = multiply
     this.pxTo = pxTo
   }
