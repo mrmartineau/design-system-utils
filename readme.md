@@ -30,7 +30,7 @@ export const myDesignSystem = {
   },
 
   type: {
-    baseFontSize: '20px',
+    baseFontSize: 20,
 
     // the values below use modular-scale
     sizes: {
