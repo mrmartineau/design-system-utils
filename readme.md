@@ -155,6 +155,7 @@ ds.multiply(ds.get('spacing.baseline'), 2)
 #### `pxTo`
 Converts `px` to `rem` or `em
 ```js
+// ds.pxTo(fontSize, baseFontSize, unit)
 ds.pxTo(12, 20, 'rem') // 0.6rem
 ds.pxTo(12, 20, 'em') // 0.6em
 ```
