@@ -141,6 +141,7 @@ The `ds.spacing()` method returns a value from your `spacing.scale` array. It ta
 
 ds.spacing(2) // '16px'
 ```
+Note: `ds.space(2)` can also be used.
 
 ### Calculations
 The framework currently provides a few calculation functions, `multiply` and `pxTo`:
