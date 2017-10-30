@@ -4,7 +4,14 @@ import { multiply, pxTo } from './calcs'
 import ms from 'modularscale-js'
 
 export default class DesignSystem {
-  constructor(system) {
+  constructor(system, options) {
+    const defaultOptions = {
+      defaultUnit: 'px',
+      useModularScale: true,
+      fontSizeUnit: 'rem',
+    }
+    this.options = Object.assign({}, options, defaultOptions)
+
     this.designSystem = system
     this.color = color(system.colorPalette)
     this.multiply = multiply
@@ -26,13 +33,13 @@ export default class DesignSystem {
   fontSize(size) {
     const value = get(this.designSystem.type.sizes, size)
     let output
-    if (this.designSystem.settings.useModularScale) {
+    if (this.options.useModularScale) {
       output = ms(value, this.designSystem.type.modularscale)
     } else {
       output = value
     }
 
-    switch (this.designSystem.settings.fontSizeUnit) {
+    switch (this.options.fontSizeUnit) {
       case 'rem':
         return pxTo(output, this.designSystem.type.baseFontSize, 'rem')
       case 'em':

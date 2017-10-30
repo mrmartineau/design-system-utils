@@ -25,7 +25,6 @@ const EmotionButton = styled('button')`
   font-size: ${ds.fontSize('l')};
   &:hover {
 		background-color: ${ds.color('secondary', 'dark')};
-
 	}
 `
 
