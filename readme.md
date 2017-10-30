@@ -25,7 +25,7 @@ Below are the mandatory items that your design system should use. Beyond these, 
 ```js
 {
   type: {
-    baseFontSize:<number>20,
+    baseFontSize: <number>,
 
     sizes: {
       key: <number | string>
@@ -34,7 +34,7 @@ Below are the mandatory items that your design system should use. Beyond these, 
     // If you're using a modular scale, set it up here
     // Use these docs to find out more: https://github.com/modularscale/modularscale-js
     modularscale: {
-      base: <number>,
+      base: <number | array>,
       ratio: <number>,
     },
   },
@@ -59,10 +59,16 @@ Below are the mandatory items that your design system should use. Beyond these, 
     key: <number | string>,
   },
 
-  zIndex: {},
+  // Z-index
+  // Used with `ds.z()`
+  zIndex: {
+    key: <number>
+  },
 
+  // Spacing
+  // Used with `ds.spacing()` or `ds.space()`
   spacing: {
-    scale: [<number | string>, ...],
+    scale: <array>[<number | string>, ...],
   },
 }
 ```
