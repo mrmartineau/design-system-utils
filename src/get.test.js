@@ -2,7 +2,7 @@ import get from './get'
 import { ds } from '../example/myDesignSystem'
 
 const testGet = {
-  foo: 'bar'
+  foo: 'bar',
 }
 
 test('get', () => {

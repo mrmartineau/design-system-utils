@@ -13,7 +13,7 @@
     "test:coverage": "jest --coverage",
     "build": "babel src -d cjs",
     "prepublishOnly": "npm run build",
-    "format:js": "prettier-standard 'src/**/*.js' 'example/**/*.js'",
+    "format:js": "prettier --config .prettierrc --write '{src,example}/**/*.js'",
     "lint:js": "standard",
     "precommit": "lint-staged"
   },
@@ -33,7 +33,7 @@
     "husky": "^0.14.3",
     "jest": "^21.2.1",
     "lint-staged": "^4.3.0",
-    "prettier-standard": "^7.0.3",
+    "prettier": "^1.7.4",
     "standard": "^10.0.3"
   },
   "dependencies": {
@@ -42,8 +42,8 @@
   },
   "lint-staged": {
     "linters": {
-      "(src|example)**/*.js": [
-        "prettier-standard",
+      "**/*.js": [
+        "format:js",
         "test",
         "git add"
       ]

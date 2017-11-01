@@ -53,10 +53,10 @@ export default class DesignSystem {
   }
 
   spacing(index = 0) {
-    return `${this.designSystem.spacing.scale[index]}px`;
+    return `${this.designSystem.spacing.scale[index]}px`
   }
 
   space(index) {
-    return this.spacing(index);
+    return this.spacing(index)
   }
 }
