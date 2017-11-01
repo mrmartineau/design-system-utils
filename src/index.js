@@ -10,8 +10,7 @@ export default class DesignSystem {
       useModularScale: true,
       fontSizeUnit: 'rem',
     }
-    this.options = Object.assign({}, options, defaultOptions)
-
+    this.options = Object.assign({}, defaultOptions, options)
     this.designSystem = system
     this.color = color(system.colorPalette)
     this.multiply = multiply
