@@ -1,6 +1,7 @@
 import { ds } from '../example/myDesignSystem'
 import { ds1 } from './testData/ds1'
 import { ds2 } from './testData/ds2'
+import { ds3 } from './testData/ds3'
 
 test('breakpoints', () => {
   expect(ds.bp('s')).toBe(300)
@@ -14,6 +15,7 @@ test('z-index', () => {
 })
 
 test('spacing', () => {
+  expect(ds.spacing()).toBe('0px')
   expect(ds.spacing(3)).toBe('24px')
   expect(ds.space(2)).toBe('16px')
 })
@@ -29,6 +31,10 @@ test('font-size - ds1', () => {
 
 test('font-size - ds2', () => {
   expect(ds2.fs('m')).toBe('45px')
+})
+
+test('font-size - ds3', () => {
+  expect(ds3.fs('m')).toBe('1.5em')
 })
 
 test('misc', () => {
