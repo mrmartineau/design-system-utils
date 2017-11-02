@@ -21,14 +21,61 @@ yarn add design-system-utils
 Create your design system file, this contains all your global variables that your app will use, think font-sizes, color palette etc.
 
 ## Setup your design system
-This is an excerpt from the example design-system. See a more complete example in the [example](example/myDesignSystem.js) directory.
-
+Below are the mandatory items that your design system should use. Beyond these, you can add anything you like.
 ```js
-export const myDesignSystem = {
-  settings: {
-    useModularScale: true,
+{
+  type: {
+    baseFontSize: <number>,
+
+    sizes: {
+      key: <number | string>
+    },
+
+    // If you're using a modular scale, set it up here
+    // Use these docs to find out more: https://github.com/modularscale/modularscale-js
+    modularscale: {
+      base: <number | array>,
+      ratio: <number>,
+    },
   },
 
+  // Color palette
+  // Used with `ds.color()`
+  // Each object needs to have the same shape
+  // Each color object needs a `base` value to be the default
+  // Have as many color objects as you like
+  colorPalette: {
+    colorName: {
+      base: <string>, // base is the default
+    },
+  },
+
+  // Breakpoints
+  // Used with `ds.bp()`
+  // Keys can be anything you like
+  // Have as many breakpoints as you like
+  // Values can be use any unit you like
+  breakpoints: {
+    key: <number | string>,
+  },
+
+  // Z-index
+  // Used with `ds.z()`
+  zIndex: {
+    key: <number>
+  },
+
+  // Spacing
+  // Used with `ds.spacing()` or `ds.space()`
+  spacing: {
+    scale: <array>[<number | string>, ...],
+  },
+}
+```
+
+This is an excerpt from the example design-system. See a more complete example in the [example](example/myDesignSystem.js) directory.
+```js
+export const myDesignSystem = {
   type: {
     baseFontSize: 20,
 
@@ -74,7 +121,10 @@ export const myDesignSystem = {
 // myDesignSystem.js
 import DesignSystem from 'design-system'
 export const myDesignSystem {...} // your design-system goes here
-export const ds = new DesignSystem(myDesignSystem)
+export const ds = new DesignSystem(myDesignSystem, {
+  useModularScale: true,
+  fontSizeUnit: 'rem',
+})
 ```
 
 ## Import the design system into your component file
@@ -86,7 +136,7 @@ import { ds } from './myDesignSystem'
 The `ds.get()` function can be used to get any value from the design-system. Use dot notation to find the value you need.
 ```js
 // with the system setup, as above
-ds.get('type.baseFontSize') // 20px
+ds.get('lineHeight.headings') // 1.1
 ```
 
 I have provided a few other helper methods to make finding certain values more simple.

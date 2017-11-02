@@ -8,9 +8,14 @@
     "example": "example"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "build": "babel src -d cjs",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "format:js": "prettier --config .prettierrc --write '{src,example}/**/*.js'",
+    "lint:js": "standard",
+    "precommit": "lint-staged"
   },
   "keywords": [
     "css-in-js",
@@ -24,10 +29,27 @@
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.0"
+    "babel-preset-env": "^1.6.0",
+    "husky": "^0.14.3",
+    "jest": "^21.2.1",
+    "lint-staged": "^4.3.0",
+    "prettier": "^1.7.4",
+    "standard": "^10.0.3"
   },
   "dependencies": {
     "modularscale-js": "^3.0.1",
     "object-get": "^2.1.0"
+  },
+  "lint-staged": {
+    "linters": {
+      "**/*.js": [
+        "format:js",
+        "test",
+        "git add"
+      ]
+    }
+  },
+  "standard": {
+    "globals": ["expect", "test"]
   }
 }

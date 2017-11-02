@@ -2,11 +2,6 @@ import colorPalette from './colorPalette'
 import DesignSystem from '../src'
 
 export const myDesignSystem = {
-  settings: {
-    useModularScale: true,
-    fontSizeUnit: 'rem',
-  },
-
   type: {
     baseFontSize: 20,
 
@@ -33,8 +28,6 @@ export const myDesignSystem = {
       mono: 'Menlo, Monaco, "Courier New", monospace',
     },
 
-    // font-family-base: ko-font(system),
-    // font-family-headings: ko-font(serif),
     lineHeight: {
       headings: 1.1,
     },
@@ -78,7 +71,7 @@ export const myDesignSystem = {
     default: {
       duration: '300ms',
       timing: 'cubic-bezier(0.77, 0, 0.175, 1)',
-      transition: 'all $default-transition-duration $default-transition-timing',
+      transition: 'all 300ms cubic-bezier(0.77, 0, 0.175, 1)',
     },
   },
 
@@ -87,4 +80,7 @@ export const myDesignSystem = {
   borderRadius: '0.3em',
 }
 
-export const ds = new DesignSystem(myDesignSystem)
+export const ds = new DesignSystem(myDesignSystem, {
+  useModularScale: true,
+  fontSizeUnit: 'rem',
+})

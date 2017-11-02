@@ -24,9 +24,8 @@ const EmotionButton = styled('button')`
   color: ${ds.color('bright')};
   font-size: ${ds.fontSize('l')};
   &:hover {
-		background-color: ${ds.color('secondary', 'dark')};
-
-	}
+    background-color: ${ds.color('secondary', 'dark')};
+  }
 `
 
 const GlamorousHeading = glamorous.h2({
@@ -47,7 +46,7 @@ const GlamorousButton = glamorous.button({
   },
 })
 
-const App = () =>
+const App = () => (
   <div>
     <EmotionHeading>With Styled Components</EmotionHeading>
     <EmotionButton>Please click me</EmotionButton>
@@ -55,5 +54,6 @@ const App = () =>
     <GlamorousHeading>With Glamorous</GlamorousHeading>
     <GlamorousButton>Please click me</GlamorousButton>
   </div>
+)
 
 render(<App />, document.getElementById('root'))
