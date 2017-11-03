@@ -7,7 +7,14 @@
   "directories": {
     "example": "example"
   },
+  "size-limit": [
+    {
+      "path": "cjs/index.js",
+      "limit": "9 KB"
+    }
+  ],
   "scripts": {
+    "size": "size-limit",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -34,6 +41,7 @@
     "jest": "^21.2.1",
     "lint-staged": "^4.3.0",
     "prettier": "^1.7.4",
+    "size-limit": "^0.12.1",
     "standard": "^10.0.3"
   },
   "dependencies": {
