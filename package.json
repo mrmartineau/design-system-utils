@@ -10,7 +10,7 @@
   "size-limit": [
     {
       "path": "cjs/index.js",
-      "limit": "9 KB"
+      "limit": "1.5 KB"
     }
   ],
   "scripts": {
