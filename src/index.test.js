@@ -26,15 +26,18 @@ test('font-size - ds', () => {
 })
 
 test('font-size - ds1', () => {
-  expect(ds1.fs('base')).toBe('30px')
+  expect(ds1.fontSize('base')).toBe('30px')
+  expect(ds1.fontSize('base', true)).toBe('30px')
 })
 
 test('font-size - ds2', () => {
   expect(ds2.fs('m')).toBe('45px')
+  expect(ds2.fs('m', true)).toBe('45px')
 })
 
 test('font-size - ds3', () => {
   expect(ds3.fs('m')).toBe('1.5em')
+  expect(ds3.fs('m', true)).toBe('45px')
 })
 
 test('misc', () => {

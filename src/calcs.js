@@ -24,3 +24,16 @@ export const multiply = (initial, multiplier) => {
 export const pxTo = (value, base = 20, unit = 'rem') => {
   return `${value / base}${unit}`
 }
+
+/**
+ * @module toPx
+ * @description converts a `rem` or `em` value to `px`
+ * @author Zander
+ * @param {string} value
+ * @param {number} base
+ * @return {string}
+ * @example: toPx(30, 16)
+ */
+export const toPx = (value, base = 20) => {
+  return `${parseFloat(value) * base}px`
+}

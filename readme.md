@@ -149,8 +149,9 @@ I have provided a few other helper methods to make finding certain values more s
 ### Get font-sizes
 The `ds.fontSize()` method is a short-hand for the `ds.get()` method. It can be used to get a breakpoint from the `type.sizes` object.
 ```js
-ds.fontSize('xl') // 45 - we are using modular-scale to calculate sizes
-ds.fs('xl') // same as above 45 - we are using modular-scale to calculate sizes
+ds.fontSize('xl')
+ds.fs('xl') // `fs()` is a short-hand alias for `fontSize()`
+ds.fs('xl', true) // return font-size in px regardless of `option.fontSizeUnit` value
 ```
 
 ### Color palette
@@ -214,6 +215,13 @@ Converts `px` to `rem` or `em`
 // ds.pxTo(fontSize, baseFontSize, unit)
 ds.pxTo(12, 20, 'rem') // 0.6rem
 ds.pxTo(12, 20, 'em') // 0.6em
+```
+
+#### `toPx`
+Converts `rem` or `em` value to `px`
+```js
+ds.toPx('1.875rem', 16) // 30px
+ds.toPx('1.875em', 16) // 30px
 ```
 
 ## Demo & examples
