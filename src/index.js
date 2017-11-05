@@ -30,13 +30,19 @@ export default class DesignSystem {
     return get(this.designSystem.zIndex, z)
   }
 
-  fontSize(size) {
+  fontSize(size, toPxl = false) {
     const value = get(this.designSystem.type.sizes, size)
     let output
     if (this.options.useModularScale) {
       output = ms(value, this.designSystem.type.modularscale)
     } else {
       output = value
+    }
+
+    const untransformedOutput = `${output}px`
+
+    if (toPxl) {
+      return untransformedOutput
     }
 
     switch (this.options.fontSizeUnit) {
@@ -53,12 +59,12 @@ export default class DesignSystem {
           'em'
         )
       default:
-        return `${output}px`
+        return untransformedOutput
     }
   }
 
-  fs(size) {
-    return this.fontSize(size)
+  fs(size, toPxl = false) {
+    return this.fontSize(size, toPxl)
   }
 
   spacing(index = 0) {
