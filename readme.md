@@ -12,6 +12,8 @@
 Maintaining styling consistency in a web app is always tough. This micro framework aims to standardise your design-system and provide helpful utilities to access it's information.
 
 ## Install
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/mrmartineau/design-system-utils.svg)](https://greenkeeper.io/)
 ```sh
 npm i --save design-system-utils
 
