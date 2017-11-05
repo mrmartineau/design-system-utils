@@ -29,16 +29,18 @@ Below are the mandatory items that your design system should use. Beyond these, 
 ```js
 {
   type: {
-    baseFontSize: <number>,
+    // this should be set as a px value if you have `options.fontSizeUnit` set
+    // to 'rem' or 'em' so that the lib can convert the values properly
+    baseFontSize: <string>,
 
     sizes: {
-      key: <number | string>
+      key: <number | string>,
     },
 
     // If you're using a modular scale, set it up here
     // Use these docs to find out more: https://github.com/modularscale/modularscale-js
     modularscale: {
-      base: <number | array>,
+      base: <number | array>,  // should be the same as baseFontSize
       ratio: <number>,
     },
   },
@@ -81,7 +83,7 @@ This is an excerpt from the example design-system. See a more complete example i
 ```js
 export const myDesignSystem = {
   type: {
-    baseFontSize: 20,
+    baseFontSize: '20px',
 
     // the values below use modular-scale
     sizes: {

@@ -3,7 +3,7 @@ import DesignSystem from '../index'
 
 const DesignSystem2 = {
   type: {
-    baseFontSize: 30,
+    baseFontSize: '30px',
 
     modularscale: {
       base: 30,

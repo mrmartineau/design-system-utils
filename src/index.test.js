@@ -38,7 +38,7 @@ test('font-size - ds3', () => {
 })
 
 test('misc', () => {
-  expect(ds.get('type.baseFontSize')).toBe(20)
+  expect(ds.get('type.baseFontSize')).toBe('20px')
   expect(ds1.get('type.baseFontSize')).toBe('30px')
-  expect(ds2.get('type.baseFontSize')).toBe(30)
+  expect(ds2.get('type.baseFontSize')).toBe('30px')
 })
