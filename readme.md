@@ -216,6 +216,13 @@ ds.pxTo(12, 20, 'rem') // 0.6rem
 ds.pxTo(12, 20, 'em') // 0.6em
 ```
 
+#### `toPx`
+Converts `rem` or `em` value to `px`
+```js
+ds.toPx('1.875rem', 16) // 30px
+ds.toPx('1.875em', 16) // 30px
+```
+
 ## Demo & examples
 I created a demo on [codesandbox.io](https://codesandbox.io/s/91kjlxnm0p), it includes examples of using the design-system utils with [emotion](https://emotion.sh/), [styled-components](https://www.styled-components.com/) and [glamorous](https://glamorous.rocks). There is also a basic example [here](example/).
 
