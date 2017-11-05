@@ -13,7 +13,7 @@ export const multiply = (initial, multiplier) => {
 
 /**
  * @module pxTo
- * @description convert a pixel value to `rem` or `em`
+ * @description converts `px` to `rem` or `em`
  * @author Zander
  * @param {number} value
  * @param {number} base
