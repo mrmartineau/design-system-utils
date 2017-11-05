@@ -1,6 +1,7 @@
 <h1 align="center">
   design-system-utils
 
+  [![Travis CI Build](https://img.shields.io/travis/mrmartineau/design-system-utils.svg?style=flat-square)](https://travis-ci.org/mrmartineau/design-system-utils)
   [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
   ![](https://img.shields.io/badge/licence-MIT-blue.svg?style=flat-square)
   [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
@@ -16,6 +17,9 @@ npm i --save design-system-utils
 
 yarn add design-system-utils
 ```
+
+### Size
+Package size: **992 B** minified and gzipped
 
 ## Usage
 Create your design system file, this contains all your global variables that your app will use, think font-sizes, color palette etc.
