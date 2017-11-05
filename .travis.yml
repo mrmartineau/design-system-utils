@@ -7,3 +7,5 @@ cache: yarn
 
 script:
  - npm test
+ - npm run build
+ - npm run size
