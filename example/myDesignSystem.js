@@ -3,7 +3,7 @@ import DesignSystem from '../src'
 
 export const myDesignSystem = {
   type: {
-    baseFontSize: 20,
+    baseFontSize: '20px',
 
     sizes: {
       xs: -2,
@@ -16,7 +16,7 @@ export const myDesignSystem = {
     },
 
     modularscale: {
-      base: 20,
+      base: 20, // should be the same as baseFontSize
       ratio: 1.5,
     },
 

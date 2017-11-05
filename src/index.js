@@ -40,9 +40,17 @@ export default class DesignSystem {
 
     switch (this.options.fontSizeUnit) {
       case 'rem':
-        return pxTo(output, this.designSystem.type.baseFontSize, 'rem')
+        return pxTo(
+          output,
+          parseFloat(this.designSystem.type.baseFontSize),
+          'rem'
+        )
       case 'em':
-        return pxTo(output, this.designSystem.type.baseFontSize, 'em')
+        return pxTo(
+          output,
+          parseFloat(this.designSystem.type.baseFontSize),
+          'em'
+        )
       default:
         return `${output}px`
     }
