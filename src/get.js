@@ -8,6 +8,4 @@
 
 import objectGet from 'object-get'
 
-export default function get(obj, value) {
-  return objectGet(obj, value)
-}
+export default (obj, value) => objectGet(obj, value)

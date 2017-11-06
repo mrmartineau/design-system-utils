@@ -7,9 +7,7 @@
  * @return {number}
  * @example: multiply(30, 2)
  */
-export const multiply = (initial, multiplier) => {
-  return initial * multiplier
-}
+export const multiply = (initial, multiplier) => initial * multiplier
 
 /**
  * @module pxTo
@@ -21,9 +19,7 @@ export const multiply = (initial, multiplier) => {
  * @return {string}
  * @example: pxTo(30, 16, 'em')
  */
-export const pxTo = (value, base = 20, unit = 'rem') => {
-  return `${value / base}${unit}`
-}
+export const pxTo = (value, base = 20, unit = 'rem') => `${value / base}${unit}`
 
 /**
  * @module toPx
@@ -34,6 +30,4 @@ export const pxTo = (value, base = 20, unit = 'rem') => {
  * @return {string}
  * @example: toPx(30, 16)
  */
-export const toPx = (value, base = 20) => {
-  return `${parseFloat(value) * base}px`
-}
+export const toPx = (value, base = 20) => `${parseFloat(value) * base}px`
