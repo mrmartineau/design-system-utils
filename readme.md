@@ -19,7 +19,7 @@ yarn add design-system-utils
 ```
 
 ### Size
-Package size: **992 B** minified and gzipped
+Package size: **1.06 KB** minified and gzipped
 
 ## Usage
 Create your design system file, this contains all your global variables that your app will use, think font-sizes, color palette etc.
