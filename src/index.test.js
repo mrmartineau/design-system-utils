@@ -40,8 +40,14 @@ test('font-size - ds3', () => {
   expect(ds3.fs('m', true)).toBe('45px')
 })
 
-test('misc', () => {
+test('get', () => {
   expect(ds.get('type.baseFontSize')).toBe('20px')
   expect(ds1.get('type.baseFontSize')).toBe('30px')
   expect(ds2.get('type.baseFontSize')).toBe('30px')
+})
+
+test('ds.multiply', () => {
+  expect(ds.multiply(20, 2)).toBe(40)
+  expect(ds.multiply('type.baseFontSize', 2)).toBe(40)
+  expect(ds.multiply('spacing.baseline', 2)).toBe(40)
 })
