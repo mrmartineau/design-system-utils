@@ -206,7 +206,13 @@ The framework currently provides a few calculation functions, `multiply` and `px
 #### `multiply`
 ```js
 ds.multiply(10, 2) // 20
+
+// you can pass in another value from the system
 ds.multiply(ds.get('spacing.baseline'), 2)
+
+// or just use the key from the system
+// the initial value will always be run through `parseFloat()`
+ds.multiply('spacing.baseline', 2)
 ```
 
 #### `pxTo`
