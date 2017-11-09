@@ -63,5 +63,8 @@
       "expect",
       "test"
     ]
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": ["./cjs"]
   }
 }
