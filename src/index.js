@@ -40,12 +40,15 @@ export default class DesignSystem {
   }
 
   fontSize(size, toPxl = false) {
-    const value = get(this.designSystem.type.sizes, size)
     let output
     if (this.options.useModularScale) {
+      const value =
+        typeof size === 'number'
+          ? size
+          : get(this.designSystem.type.sizes, size)
       output = ms(value, this.designSystem.type.modularscale)
     } else {
-      output = value
+      output = get(this.designSystem.type.sizes, size)
     }
 
     const untransformedOutput = `${output}px`

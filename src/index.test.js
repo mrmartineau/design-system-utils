@@ -22,7 +22,9 @@ test('spacing', () => {
 
 test('font-size - ds', () => {
   expect(ds.fs('base')).toBe('1rem')
+  expect(ds.fs(0)).toBe('1rem')
   expect(ds.fs('m')).toBe('1.5rem')
+  expect(ds.fs(1)).toBe('1.5rem')
 })
 
 test('font-size - ds1', () => {
