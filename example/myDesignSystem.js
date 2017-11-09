@@ -1,6 +1,19 @@
 import colorPalette from './colorPalette'
 import DesignSystem from '../src'
 
+const fontFamily = {
+  system:
+    '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans"',
+  sans: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+  serif: 'Georgia, "Times New Roman", Times, serif',
+  mono: 'Menlo, Monaco, "Courier New", monospace',
+}
+
+const transitions = {
+  duration: '300ms',
+  timing: 'cubic-bezier(0.77, 0, 0.175, 1)',
+}
+
 export const myDesignSystem = {
   type: {
     baseFontSize: '20px',
@@ -20,13 +33,9 @@ export const myDesignSystem = {
       ratio: 1.5,
     },
 
-    fontFamily: {
-      system:
-        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans"',
-      sans: '"Helvetica Neue", Helvetica, Arial, sans-serif',
-      serif: 'Georgia, "Times New Roman", Times, serif',
-      mono: 'Menlo, Monaco, "Courier New", monospace',
-    },
+    fontFamily,
+    fontFamilyBase: fontFamily.system,
+    fontFamilyHeadings: fontFamily.mono,
 
     lineHeight: {
       headings: 1.1,
@@ -69,13 +78,11 @@ export const myDesignSystem = {
 
   transition: {
     default: {
-      duration: '300ms',
-      timing: 'cubic-bezier(0.77, 0, 0.175, 1)',
-      transition: 'all 300ms cubic-bezier(0.77, 0, 0.175, 1)',
+      duration: transitions.duration,
+      timing: transitions.timing,
+      transition: `all ${transitions.duration} ${transitions.timing}`,
     },
   },
-
-  animation: {},
 
   borderRadius: '0.3em',
 }
