@@ -152,6 +152,7 @@ The `ds.fontSize()` method is a short-hand for the `ds.get()` method. It can be 
 ds.fontSize('xl')
 ds.fs('xl') // `fs()` is a short-hand alias for `fontSize()`
 ds.fs('xl', true) // return font-size in px regardless of `option.fontSizeUnit` value
+ds.fs(6) // returns font-size of the 6th item on the modular-scale. This will only work if the òptions.modularscale` is `true`
 ```
 
 ### Color palette
