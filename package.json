@@ -1,6 +1,6 @@
 {
   "name": "design-system-utils",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Design-system utils for working with JS-in-CSS",
   "main": "./cjs/index.js",
   "module": "./src/index.js",
