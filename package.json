@@ -4,6 +4,7 @@
   "description": "Design-system utils for working with JS-in-CSS",
   "main": "./cjs/index.js",
   "module": "./src/index.js",
+  "browser": "./cjs/index.js",
   "types": "./src/index.d.ts",
   "repository": "https://github.com/mrmartineau/design-system-utils",
   "directories": {
