@@ -38,6 +38,9 @@ export default class DesignSystem {
   /*~ get a color from your color palette */
   color(hue: string, value?: string): string;
 
+  /*~ get a color from your brand color palette */
+  brand(color: string): string;
+
   /*~ the design-system itself */
   designSystem: object;
 
