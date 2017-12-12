@@ -16,10 +16,12 @@ const DesignSystem1 = {
     },
   },
 
-  colorPalette: {
-    blue: {
-      base: 'blue',
-      dark: 'navyblue',
+  colors: {
+    colorPalette: {
+      blue: {
+        base: 'blue',
+        dark: 'navyblue',
+      },
     },
   },
 

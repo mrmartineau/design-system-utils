@@ -14,6 +14,8 @@ const transitions = {
   timing: 'cubic-bezier(0.77, 0, 0.175, 1)',
 }
 
+const palette = colorPalette
+
 export const myDesignSystem = {
   type: {
     baseFontSize: '20px',
@@ -48,7 +50,18 @@ export const myDesignSystem = {
     },
   },
 
-  colorPalette,
+  colors: {
+    colorPalette: palette,
+
+    brand: {
+      red: '#e82219',
+      deeporange: '#ff7200',
+      orange: '#ff9500',
+      green: '#c4d000',
+      teal: '#1aa5c8',
+      navy: '#0052da',
+    },
+  },
 
   breakpoints: {
     s: 300,

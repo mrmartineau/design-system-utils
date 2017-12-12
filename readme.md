@@ -47,14 +47,21 @@ Below are the mandatory items that your design system should use. Beyond these, 
   },
 
   // Color palette
-  // Used with `ds.color()`
   // Each object needs to have the same shape
   // Each color object needs a `base` value to be the default
   // Have as many color objects as you like
-  colorPalette: {
-    colorName: {
-      base: <string>, // base is the default
+  colors: {
+    // Used with `ds.color('colorName')`
+    colorPalette: {
+      colorName: {
+        base: <string>, // base is the default
+      },
     },
+
+    // Used with `ds.brand('colorName)`
+    brand: {
+      colorName: <string>, // base is the default
+    }
   },
 
   // Breakpoints
@@ -157,27 +164,55 @@ ds.fs(6) // returns font-size of the 6th item on the modular-scale. This will on
 ```
 
 ### Color palette
+There are two possible ways to access color information: the color palette and the brand colors. The color palette is intended to contain all the colors (and their shades) that your app will use, and the brand palette is the specific colors that your brand uses. Two methods can be used to retrieve the values, these are:
+
+```js
+colors: {
+  // With a color palette like this:
+  colorPalette: {
+    bright: {
+      base: '#F9FAFB',
+      dark: '#F4F6F8',
+      darker: '#DFE4E8',
+    },
+
+    dark: {
+      base: '#212B35',
+      light: '#454F5B',
+      lighter: '#637381',
+    },
+  },
+
+  // With a brand palette like this:
+  brand: {
+    red: '#e82219',
+    deeporange: '#ff7200',
+    orange: '#ff9500',
+    green: '#c4d000',
+    teal: '#1aa5c8',
+    navy: '#0052da',
+  }
+},
+```
+
+#### Get color palette value
 The `ds.color()` function gets values from the `colorPalette` object. It assumes every color has a `base` property and other properties for different shades of the same color.
 This is a short-hand for the `ds.get()` function.
+
 ```js
-// With a color palette like this:
-const colorPalette = {
-  bright: {
-    base: '#F9FAFB',
-    dark: '#F4F6F8',
-    darker: '#DFE4E8',
-  },
-
-  dark: {
-    base: '#212B35',
-    light: '#454F5B',
-    lighter: '#637381',
-  },
-}
-
 // Get values like this:
 ds.color('bright') // #F9FAFB - the `base` key is the default, so it is not needed
 ds.color('bright', 'dark')
+```
+
+#### Get brand palette value
+The `ds.brand()` function gets values from the `colors.brand` object.
+This is a short-hand for the `ds.get()` function.
+```js
+// Get brand values like this:
+ds.brand('orange')
+ds.brand('pink')
+ds.brand('primary.blue') // it is possible to nest this object as much as you like
 ```
 
 ### Responsive Breakpoints

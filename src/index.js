@@ -12,7 +12,7 @@ export default class DesignSystem {
     }
     this.options = Object.assign({}, defaultOptions, options)
     this.designSystem = system
-    this.color = color(system.colorPalette)
+    this.color = color(system.colors.colorPalette)
     this.pxTo = pxTo
     this.toPx = toPx
   }
@@ -85,5 +85,9 @@ export default class DesignSystem {
 
   space(index) {
     return this.spacing(index)
+  }
+
+  brand(color) {
+    return get(this.designSystem.colors.brand, color)
   }
 }

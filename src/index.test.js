@@ -53,3 +53,8 @@ test('ds.multiply', () => {
   expect(ds.multiply('type.baseFontSize', 2)).toBe(40)
   expect(ds.multiply('spacing.baseline', 2)).toBe(40)
 })
+
+test('ds.brand', () => {
+  expect(ds.brand('orange')).toBe('#ff9500')
+  expect(ds.brand('teal')).toBe('#1aa5c8')
+})
