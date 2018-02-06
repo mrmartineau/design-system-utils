@@ -30,10 +30,10 @@ export default class DesignSystem {
   space(index: number): string;
 
   /*~ converts a `rem` or `em` value to `px` */
-  toPx(value: number, base: number, unit?: string): string;
+  toPx(value: number, base: number): string;
 
   /*~ converts `px` to `rem` or `em` */
-  pxTo(value: number, base: number): string;
+  pxTo(value: number, base: number, unit?: string): string;
 
   /*~ get a color from your color palette */
   color(hue: string, value?: string): string;
