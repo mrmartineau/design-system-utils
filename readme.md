@@ -152,9 +152,6 @@ export const ds = new DesignSystem(myDesignSystem, {
 })
 ```
 
-## Import the design system into your component file
-
-
 ## Accessing the design system data in your app
 To access your design system, you just need to `import` it to the current file, like so:
 ```js
