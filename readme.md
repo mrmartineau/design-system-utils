@@ -8,9 +8,7 @@
   [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 </h1>
 
-> Design system framework for modern front-end projects
-
-Maintaining styling consistency in a web app is always tough. This micro framework aims to standardise your design-system and provide helpful utilities to access it's information.
+> Design System Utils is a micro framework that standardises your design-system & provide helpful utilities to access it’s information. It can be used with styled-components, emotion, glamorous or any other CSS-in-JS framework
 
 ## Install
 ```sh
@@ -20,10 +18,23 @@ yarn add design-system-utils
 ```
 
 ### Size
-Package size: **1.08 KB** minified and gzipped
+Package size: **1.08 KB unminified** :+1:
 
 ## Usage
-Create your design system file, this contains all your global variables that your app will use, think font-sizes, color palette etc.
+You first need to create your design system file, this contains all your global variables that your app will use, think font-sizes, color palette, spacing etc. I usually create a top-level directory named `theme` or `designsystem`, and add an index.js inside, like so:
+
+```js
+// ./theme/index.js
+import DesignSystem from 'design-system-utils'
+
+// your design-system goes here, see below for details
+export const myDesignSystem {...}
+
+export const ds = new DesignSystem(myDesignSystem, {
+  useModularScale: true,
+  fontSizeUnit: 'rem',
+})
+```
 
 ## Setup your design system
 Below are the mandatory items that your design system should use. Beyond these, you can add anything you like.
@@ -142,11 +153,46 @@ export const ds = new DesignSystem(myDesignSystem, {
 ```
 
 ## Import the design system into your component file
+
+
+## Accessing the design system data in your app
+To access your design system, you just need to `import` it to the current file, like so:
 ```js
 import { ds } from './myDesignSystem'
 ```
 
-## Get some values
+Here I have created a very simple component using the design system and [styled-components](https://styled-components.com), you should be able to see how easy it is to pull information from the design system.
+
+```js
+// Example uses styled-components
+import styled from 'styled-component'
+import { ds } from './theme'
+export const Box = styled.div`
+  font-family: ${ds.get('type.fontFamilyBase')};
+  background-color: ${ds.brand('primary')};
+  margin: ${ds.space(2)} 0;
+`
+```
+## Options
+There are two options that can be passed to your design system. These relate to font-sizing.
+
+```js
+// Use default options
+export const ds = new DesignSystem(myDesignSystem)
+
+// With custom options
+export const ds = new DesignSystem(myDesignSystem, {
+
+  // converts the `type.sizes` values into modular scale values
+  useModularScale: true,
+
+  // sets the font-size unit when calling fs.fontSize()
+  fontSizeUnit: 'rem',
+})
+```
+
+## API methods
+### Get some values
 The `ds.get()` function can be used to get any value from the design-system. Use dot notation to find the value you need.
 ```js
 // with the system setup, as above
@@ -156,11 +202,44 @@ ds.get('lineHeight.headings') // 1.1
 I have provided a few other helper methods to make finding certain values more simple.
 ### Get font-sizes
 The `ds.fontSize()` method is a short-hand for the `ds.get()` method. It can be used to get a breakpoint from the `type.sizes` object.
+
+The `type.sizes` object’s values can be formatted in a few ways:
+
+* `s: -2` — if a number is used and options.modularscale = true, then ds.fontSize() converts this number to a value on the modular scale.
+* `s: '13px'`
+* `s: '1.4rem'`
+
 ```js
+// define some values// type.sizes object
+sizes: {
+  xs: -2,
+  s: -1,
+  base: 0, // [default] p, h5, h6
+  m: 1, // h4
+  l: 2, // h3
+  xl: 3, // h2
+  xxl: 4, // h1
+},
+
+// retrieve some values
 ds.fontSize('xl')
-ds.fs('xl') // `fs()` is a short-hand alias for `fontSize()`
+ds.fs('xl') // `ds.fs()` is a short-hand alias for `ds.fontSize()`
 ds.fs('xl', true) // return font-size in px regardless of `option.fontSizeUnit` value
 ds.fs(6) // returns font-size of the 6th item on the modular-scale. This will only work if the òptions.modularscale` is `true`
+```
+
+#### Modular scale
+
+To make use of a modular scale, there are a few things that need to be done:
+
+* set `options.modularscale = true`, see above for details on this
+* define your modular scale options in `type.modularscale`. Design system utils uses modularscale-js to do the conversions.
+
+```js
+modularscale: {
+  base: 20,
+  ratio: 1.5,
+},
 ```
 
 ### Color palette
@@ -238,7 +317,7 @@ ds.spacing(2) // '16px'
 Note: `ds.space(2)` can also be used.
 
 ### Calculations
-The framework currently provides a few calculation functions, `multiply` and `pxTo`:
+The framework currently provides a few calculation functions, `multiply`, `toPx` and `pxTo`:
 
 #### `multiply`
 ```js
