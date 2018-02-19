@@ -28,7 +28,7 @@ You first need to create your design system file, this contains all your global 
 import DesignSystem from 'design-system-utils'
 
 // your design-system goes here, see below for details
-export const myDesignSystem {...}
+export const myDesignSystem = {...}
 
 export const ds = new DesignSystem(myDesignSystem, {
   useModularScale: true,
