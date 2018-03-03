@@ -22,7 +22,7 @@
     "test": "jest --verbose",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "build": "babel src -d cjs",
+    "build": "babel src -d cjs --ignore spec.js,test.js,testData",
     "prepublishOnly": "npm run build",
     "format:js": "prettier --config .prettierrc --write '{src,example}/**/*.js'",
     "lint:js": "standard",
