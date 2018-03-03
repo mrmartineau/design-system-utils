@@ -18,7 +18,7 @@ yarn add design-system-utils
 ```
 
 ### Size
-Package size: **1.08 KB unminified** :+1:
+Package size: **992 B unminified** :+1:
 
 ## Usage
 You first need to create your design system file, this contains all your global variables that your app will use, think font-sizes, color palette, spacing etc. I usually create a top-level directory named `theme` or `designsystem`, and add an index.js inside, like so:
