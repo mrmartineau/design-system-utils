@@ -1,6 +1,4 @@
-import color from './color'
-import get from './get'
-import { multiply as multi, pxTo, toPx } from './calcs'
+import objectGet from 'object-get'
 import ms from 'modularscale-js'
 
 export default class DesignSystem {
@@ -11,10 +9,9 @@ export default class DesignSystem {
       fontSizeUnit: 'rem',
     }
     this.options = Object.assign({}, defaultOptions, options)
-    this.designSystem = system
-    this.color = color(system.colors.colorPalette)
-    this.pxTo = pxTo
-    this.toPx = toPx
+    this.ds = system
+    this.pxTo = (value, base = 20, unit = 'rem') => `${value / base}${unit}`
+    this.toPx = (value, base = 20) => `${parseFloat(value) * base}px`
   }
 
   multiply(initial, multiplier) {
@@ -24,31 +21,29 @@ export default class DesignSystem {
     } else {
       initialVal = initial
     }
-    return multi(initialVal, multiplier)
+    return initialVal * multiplier
   }
 
-  get(val) {
-    return get(this.designSystem, val)
+  get(value, obj = this.ds) {
+    return objectGet(obj, value)
   }
 
   bp(bp) {
-    return get(this.designSystem.breakpoints, bp)
+    return this.get(bp, this.ds.breakpoints)
   }
 
   z(z) {
-    return get(this.designSystem.zIndex, z)
+    return this.get(z, this.ds.zIndex)
   }
 
   fontSize(size, toPxl = false) {
     let output
     if (this.options.useModularScale) {
       const value =
-        typeof size === 'number'
-          ? size
-          : get(this.designSystem.type.sizes, size)
-      output = ms(value, this.designSystem.type.modularscale)
+        typeof size === 'number' ? size : this.get(size, this.ds.type.sizes)
+      output = ms(value, this.ds.type.modularscale)
     } else {
-      output = get(this.designSystem.type.sizes, size)
+      output = this.get(size, this.ds.type.sizes)
     }
 
     const untransformedOutput = `${output}px`
@@ -59,17 +54,9 @@ export default class DesignSystem {
 
     switch (this.options.fontSizeUnit) {
       case 'rem':
-        return pxTo(
-          output,
-          parseFloat(this.designSystem.type.baseFontSize),
-          'rem'
-        )
+        return this.pxTo(output, parseFloat(this.ds.type.baseFontSize), 'rem')
       case 'em':
-        return pxTo(
-          output,
-          parseFloat(this.designSystem.type.baseFontSize),
-          'em'
-        )
+        return this.pxTo(output, parseFloat(this.ds.type.baseFontSize), 'em')
       default:
         return untransformedOutput
     }
@@ -80,14 +67,18 @@ export default class DesignSystem {
   }
 
   spacing(index = 0) {
-    return `${this.designSystem.spacing.scale[index]}px`
+    return `${this.ds.spacing.scale[index]}px`
   }
 
   space(index) {
     return this.spacing(index)
   }
 
+  color(hue, value = 'base') {
+    return this.ds.colors.colorPalette[hue][value]
+  }
+
   brand(color) {
-    return get(this.designSystem.colors.brand, color)
+    return this.get(color, this.ds.colors.brand)
   }
 }

@@ -54,7 +54,27 @@ test('ds.multiply', () => {
   expect(ds.multiply('spacing.baseline', 2)).toBe(40)
 })
 
+test(`pxTo`, () => {
+  expect(ds.pxTo(30, 16, 'em')).toBe('1.875em')
+  expect(ds.pxTo(30, 16, 'rem')).toBe('1.875rem')
+  expect(ds.pxTo(30, 16)).toBe('1.875rem')
+  expect(ds.pxTo(30)).toBe('1.5rem')
+  expect(ds.pxTo(30, 16, 'px')).toBe('1.875px')
+})
+
+test(`toPx`, () => {
+  expect(ds.toPx('1.875em', 16)).toBe('30px')
+  expect(ds.toPx('1.875em')).toBe('37.5px')
+  expect(ds.toPx('1.875rem', 16)).toBe('30px')
+})
+
 test('ds.brand', () => {
   expect(ds.brand('orange')).toBe('#ff9500')
   expect(ds.brand('teal')).toBe('#1aa5c8')
+})
+
+test('ds.color', () => {
+  expect(ds.color('primary')).toBe('#181830')
+  expect(ds.color('secondary', 'light')).toBe('#fea04c')
+  expect(ds.color('text', 'dark')).toBeUndefined()
 })
