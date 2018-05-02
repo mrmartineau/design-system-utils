@@ -9,7 +9,7 @@ export default class DesignSystem {
   multiply(initial: number, multiplier: number): any;
 
   /*~ get a value from the design system object */
-  get(val: string, obj?: object): any;
+  get(value: string, obj?: object): any;
 
   /*~ get a breakpoint value from the design system object */
   bp(bp: string): any;
