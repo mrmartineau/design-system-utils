@@ -4235,10 +4235,6 @@ mixin-deep@^1.2.0:
   dependencies:
     minimist "0.0.8"
 
-modularscale-js@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/modularscale-js/-/modularscale-js-3.0.1.tgz#6b3e6a3ecac678210a14a3f700c4e7da141af9e3"
-
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"

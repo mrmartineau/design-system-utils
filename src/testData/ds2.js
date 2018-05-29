@@ -1,23 +1,24 @@
 // options: modular-scale:true, fontSizeUnit:px
 import DesignSystem from '../index'
+import ms from 'modularscale-js'
+
+const modularscale = {
+  base: [30],
+  ratio: 1.5,
+}
 
 const DesignSystem2 = {
   type: {
     baseFontSize: '30px',
 
-    modularscale: {
-      base: 30,
-      ratio: 1.5,
-    },
-
     sizes: {
-      xs: -2,
-      s: -1,
-      base: 0, // [default] p, h5, h6
-      m: 1, // h4
-      l: 2, // h3
-      xl: 3, // h2
-      xxl: 4, // h1
+      xs: `${ms(-2, modularscale)}px`,
+      s: `${ms(-1, modularscale)}px`,
+      base: `${ms(0, modularscale)}px`, // [default] p, h5, h6
+      m: `${ms(1, modularscale)}px`, // h4
+      l: `${ms(2, modularscale)}px`, // h3
+      xl: `${ms(3, modularscale)}px`, // h2
+      xxl: `${ms(4, modularscale)}px`, // h1
     },
   },
 
@@ -47,7 +48,4 @@ const DesignSystem2 = {
   },
 }
 
-export const ds2 = new DesignSystem(DesignSystem2, {
-  useModularScale: true,
-  fontSizeUnit: 'px',
-})
+export default new DesignSystem(DesignSystem2)

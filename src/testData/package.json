@@ -1,0 +1,9 @@
+{
+  "name": "testData",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "modularscale-js": "^3.0.1"
+  }
+}

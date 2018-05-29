@@ -1,18 +1,18 @@
-// options: modular-scale:false, fontSizeUnit:px
+// options: modular-scale:false, fontSizeUnit:em
 import DesignSystem from '../index'
 
-const DesignSystem1 = {
+const DesignSystem4 = {
   type: {
     baseFontSize: '30px',
 
     sizes: {
-      xs: '16px',
-      s: '20px',
-      base: '30px',
-      m: '36px',
-      l: '42px',
-      xl: '50px',
-      xxl: '58px',
+      xs: '0.5em',
+      s: '0.8em',
+      base: '1em',
+      m: '1.5em',
+      l: '2em',
+      xl: '2.5em',
+      xxl: '4em',
     },
   },
 
@@ -42,4 +42,4 @@ const DesignSystem1 = {
   },
 }
 
-export default new DesignSystem(DesignSystem1)
+export default new DesignSystem(DesignSystem4)

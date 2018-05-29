@@ -1,5 +1,11 @@
 import colorPalette from './colorPalette'
 import DesignSystem from '../src'
+import ms from 'modularscale-js'
+
+const modularscale = {
+  base: 20,
+  ratio: 1.5,
+}
 
 const fontFamily = {
   system:
@@ -21,18 +27,13 @@ export const myDesignSystem = {
     baseFontSize: '20px',
 
     sizes: {
-      xs: -2,
-      s: -1,
-      base: 0, // [default] p, h5, h6
-      m: 1, // h4
-      l: 2, // h3
-      xl: 3, // h2
-      xxl: 4, // h1
-    },
-
-    modularscale: {
-      base: 20, // should be the same as baseFontSize
-      ratio: 1.5,
+      xs: ms(-2, modularscale),
+      s: ms(-1, modularscale),
+      base: ms(0, modularscale), // [default] p, h5, h6
+      m: ms(1, modularscale), // h4
+      l: ms(2, modularscale), // h3
+      xl: ms(3, modularscale), // h2
+      xxl: ms(4, modularscale), // h1
     },
 
     fontFamily,
@@ -100,7 +101,6 @@ export const myDesignSystem = {
   borderRadius: '0.3em',
 }
 
-export const ds = new DesignSystem(myDesignSystem, {
-  useModularScale: true,
+export default new DesignSystem(myDesignSystem, {
   fontSizeUnit: 'rem',
 })

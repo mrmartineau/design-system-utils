@@ -1,6 +1,6 @@
 {
   "name": "design-system-utils",
-  "version": "0.12.1",
+  "version": "1.0.0",
   "description": "Design-system utils for working with JS-in-CSS",
   "main": "./cjs/index.js",
   "module": "./src/index.js",
@@ -46,7 +46,6 @@
     "standard": "^11.0.0"
   },
   "dependencies": {
-    "modularscale-js": "^3.0.1",
     "object-get": "^2.1.0"
   },
   "standard": {
