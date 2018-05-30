@@ -18,10 +18,32 @@ const DesignSystem1 = {
 
   colors: {
     colorPalette: {
-      blue: {
-        base: 'blue',
-        dark: 'navyblue',
+      text: {
+        base: '#212B35',
+        light: '#454F5B',
+        lighter: '#637381',
       },
+
+      primary: {
+        base: '#181830',
+        light: '#292952',
+        dark: '#0d0d19',
+      },
+
+      secondary: {
+        base: '#fe7c08',
+        light: '#fea04c',
+        dark: '#d26401',
+      }
+    },
+
+    brand: {
+      red: '#e82219',
+      deeporange: '#ff7200',
+      orange: '#ff9500',
+      green: '#c4d000',
+      teal: '#1aa5c8',
+      navy: '#0052da',
     },
   },
 
@@ -39,6 +61,7 @@ const DesignSystem1 = {
 
   spacing: {
     scale: [0, 8, 16, 24, 32, 40],
+    baseline: 20,
   },
 }
 

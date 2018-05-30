@@ -1,6 +1,5 @@
-// options: modular-scale:true, fontSizeUnit:px
+// options: fontSizeUnit:px
 import DesignSystem from '../index'
-import ms from 'modularscale-js'
 
 const modularscale = {
   base: [30],
@@ -12,13 +11,9 @@ const DesignSystem2 = {
     baseFontSize: '30px',
 
     sizes: {
-      xs: `${ms(-2, modularscale)}px`,
-      s: `${ms(-1, modularscale)}px`,
-      base: `${ms(0, modularscale)}px`, // [default] p, h5, h6
-      m: `${ms(1, modularscale)}px`, // h4
-      l: `${ms(2, modularscale)}px`, // h3
-      xl: `${ms(3, modularscale)}px`, // h2
-      xxl: `${ms(4, modularscale)}px`, // h1
+      small: '1em',
+      medium: '1.5em',
+      large: '2.4em',
     },
   },
 

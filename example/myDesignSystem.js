@@ -27,13 +27,13 @@ export const myDesignSystem = {
     baseFontSize: '20px',
 
     sizes: {
-      xs: ms(-2, modularscale),
-      s: ms(-1, modularscale),
-      base: ms(0, modularscale), // [default] p, h5, h6
-      m: ms(1, modularscale), // h4
-      l: ms(2, modularscale), // h3
-      xl: ms(3, modularscale), // h2
-      xxl: ms(4, modularscale), // h1
+      xs: `${ms(-2, modularscale)}px`,
+      s: `${ms(-1, modularscale)}px`,
+      base: `${ms(0, modularscale)}px`,
+      m: `${ms(1, modularscale)}px`,
+      l: `${ms(2, modularscale)}px`,
+      xl: `${ms(3, modularscale)}px`,
+      xxl: `${ms(4, modularscale)}px`,
     },
 
     fontFamily,
