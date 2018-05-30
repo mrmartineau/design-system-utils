@@ -1,11 +1,6 @@
 // options: fontSizeUnit:px
 import DesignSystem from '../index'
 
-const modularscale = {
-  base: [30],
-  ratio: 1.5,
-}
-
 const DesignSystem2 = {
   type: {
     baseFontSize: '30px',

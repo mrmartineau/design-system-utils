@@ -1,11 +1,5 @@
 import colorPalette from './colorPalette'
 import DesignSystem from '../src'
-import ms from 'modularscale-js'
-
-const modularscale = {
-  base: 20,
-  ratio: 1.5,
-}
 
 const fontFamily = {
   system:
@@ -27,13 +21,13 @@ export const myDesignSystem = {
     baseFontSize: '20px',
 
     sizes: {
-      xs: `${ms(-2, modularscale)}px`,
-      s: `${ms(-1, modularscale)}px`,
-      base: `${ms(0, modularscale)}px`,
-      m: `${ms(1, modularscale)}px`,
-      l: `${ms(2, modularscale)}px`,
-      xl: `${ms(3, modularscale)}px`,
-      xxl: `${ms(4, modularscale)}px`,
+      xs: '16px',
+      s: '20px',
+      base: '30px',
+      m: '36px',
+      l: '42px',
+      xl: '50px',
+      xxl: '58px',
     },
 
     fontFamily,

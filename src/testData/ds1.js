@@ -34,7 +34,7 @@ const DesignSystem1 = {
         base: '#fe7c08',
         light: '#fea04c',
         dark: '#d26401',
-      }
+      },
     },
 
     brand: {
