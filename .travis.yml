@@ -5,6 +5,9 @@ node_js:
 
 cache: yarn
 
+before_script:
+  - npm install -g modularscale-js
+
 script:
- - npm test
- - npm run size
+ - yarn test
+ - yarn size
