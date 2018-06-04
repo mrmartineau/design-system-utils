@@ -6,7 +6,7 @@ export default class DesignSystem {
   constructor(system: object, options?: object)
 
   /*~ multiply a given value */
-  multiply(initial: number, multiplier: number): any
+  multiply(initial: any, multiplier: number): any
 
   /*~ get a value from the design system object */
   get(val: string, obj?: object): any
@@ -24,10 +24,10 @@ export default class DesignSystem {
   fs(size: string): string
 
   /*~ get a spacing value from the design system object */
-  spacing(index: number): string
+  spacing(index?: number): string
 
   /*~ get a spacing value from the design system object */
-  space(index: number): string
+  space(index?: number): string
 
   /*~ get a color from your color palette */
   color(hue: string, value?: string): string
@@ -40,10 +40,10 @@ export default class DesignSystem {
 }
 
 /*~ converts a `rem` or `em` value to `px` */
-export function toPx(value: number, base: number): string
+export function toPx(value: any, base?: number): string
 
 /*~ converts `px` to `rem` or `em` */
-export function pxTo(value: number, base: number, unit?: string): string
+export function pxTo(value: any, base?: number, unit?: string): string
 
 /*~ parses a number and unit string, and returns the unit used */
 export function parseUnit(value: string): string
