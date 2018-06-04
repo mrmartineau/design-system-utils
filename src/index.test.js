@@ -140,17 +140,17 @@ test('ds.multiply', () => {
 })
 
 test(`pxTo`, () => {
-  expect(ds1.pxTo(30, 16, 'em')).toBe('1.875em')
-  expect(ds1.pxTo(30, 16, 'rem')).toBe('1.875rem')
-  expect(ds1.pxTo(30, 16)).toBe('1.875rem')
-  expect(ds1.pxTo(30)).toBe('1.5rem')
-  expect(ds1.pxTo(30, 16, 'px')).toBe('1.875px')
+  expect(pxTo(30, 16, 'em')).toBe('1.875em')
+  expect(pxTo(30, 16, 'rem')).toBe('1.875rem')
+  expect(pxTo(30, 16)).toBe('1.875rem')
+  expect(pxTo(30)).toBe('1.5rem')
+  expect(pxTo(30, 16, 'px')).toBe('1.875px')
 })
 
 test(`toPx`, () => {
-  expect(ds1.toPx('1.875em', 16)).toBe('30px')
-  expect(ds1.toPx('1.875em')).toBe('37.5px')
-  expect(ds1.toPx('1.875rem', 16)).toBe('30px')
+  expect(toPx('1.875em', 16)).toBe('30px')
+  expect(toPx('1.875em')).toBe('37.5px')
+  expect(toPx('1.875rem', 16)).toBe('30px')
 })
 
 test(`parseUnit`, () => {

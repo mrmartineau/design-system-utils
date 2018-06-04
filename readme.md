@@ -340,17 +340,19 @@ ds.multiply(ds.get('spacing.baseline'), 2)
 ds.multiply('spacing.baseline', 2)
 ```
 
-#### `ds.pxTo()`
+#### `pxTo()`
 Converts `px` to `rem` or `em`
 ```js
+import { pxTo } from 'design-system-utils'
 // ds.pxTo(fontSize, baseFontSize, unit)
 ds.pxTo(12, 20, 'rem') // 0.6rem
 ds.pxTo(12, 20, 'em') // 0.6em
 ```
 
-#### `ds.toPx()`
+#### `toPx()`
 Converts `rem` or `em` value to `px`
 ```js
+import { toPx } from 'design-system-utils'
 ds.toPx('1.875rem', 16) // 30px
 ds.toPx('1.875em', 16) // 30px
 ```

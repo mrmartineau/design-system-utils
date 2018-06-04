@@ -5,15 +5,8 @@ export default class DesignSystem {
     const defaultOptions = {
       fontSizeUnit: undefined,
     }
-    this.options = Object.assign({}, defaultOptions, options)
+    this.opts = Object.assign({}, defaultOptions, options)
     this.ds = system
-
-    // Converts px to rem/em
-    this.pxTo = (value, base = 20, unit = 'rem') =>
-      `${parseFloat(value) / base}${unit}`
-
-    // Converts rem/em to px
-    this.toPx = (value, base = 20) => `${parseFloat(value) * base}px`
   }
 
   multiply(initial, multiplier) {
@@ -48,13 +41,13 @@ export default class DesignSystem {
     }
 
     // Convert font-size to the specified unit
-    switch (this.options.fontSizeUnit) {
+    switch (this.opts.fontSizeUnit) {
       case 'rem':
-        return this.pxTo(output, baseFontSize, 'rem')
+        return pxTo(output, baseFontSize, 'rem')
       case 'em':
-        return this.pxTo(output, baseFontSize, 'em')
+        return pxTo(output, baseFontSize, 'em')
       case 'px':
-        return this.toPx(output, baseFontSize)
+        return toPx(output, baseFontSize)
       default:
         return output
     }
@@ -80,6 +73,14 @@ export default class DesignSystem {
     return this.get(color, this.ds.colors.brand)
   }
 }
+
+// Converts px to rem/em
+export const pxTo = (value, base = 20, unit = 'rem') =>
+  `${parseFloat(value) / base}${unit}`
+
+// Converts rem/em to px
+export const toPx = (value, base = 20) => `${parseFloat(value) * base}px`
+
 export const parseUnit = str => {
   str = String(str)
   return str.match(/[\d.\-\+]*\s*(.*)/)[1] || ''
