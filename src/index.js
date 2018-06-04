@@ -43,7 +43,7 @@ export default class DesignSystem {
     const baseFontSize = parseFloat(this.ds.type.baseFontSize)
 
     // Don't convert the value if we don't have to
-    if (output.indexOf(this.options.fontSizeUnit) !== -1) {
+    if (parseUnit(output) === this.opts.fontSizeUnit) {
       return output
     }
 
@@ -79,4 +79,8 @@ export default class DesignSystem {
   brand(color) {
     return this.get(color, this.ds.colors.brand)
   }
+}
+export const parseUnit = str => {
+  str = String(str)
+  return str.match(/[\d.\-\+]*\s*(.*)/)[1] || ''
 }

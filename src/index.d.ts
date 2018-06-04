@@ -44,3 +44,6 @@ export default class DesignSystem {
   /*~ the design-system itself */
   designSystem: object
 }
+
+/*~ parses a number and unit string, and returns the unit used */
+export function parseUnit(value: string): string

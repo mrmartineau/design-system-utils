@@ -355,6 +355,14 @@ ds.toPx('1.875rem', 16) // 30px
 ds.toPx('1.875em', 16) // 30px
 ```
 
+#### `parseUnit()`
+Parses a number and unit string, and returns the unit used
+```js
+import { parseUnit } from 'design-system-utils'
+parseUnit('1.875rem') // 'rem'
+parseUnit('18px') // 'px'
+```
+
 ## Demo & examples
 I created a demo on [codesandbox.io](https://codesandbox.io/s/91kjlxnm0p), it includes examples of using the design-system utils with [emotion](https://emotion.sh/), [styled-components](https://www.styled-components.com/) and [glamorous](https://glamorous.rocks). There is also a basic example [here](example/).
 

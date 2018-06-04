@@ -2,6 +2,8 @@ import ds1 from './testData/ds1'
 import ds2 from './testData/ds2'
 import DesignSystem from './index'
 
+import { pxTo, toPx, parseUnit } from './index'
+
 test('breakpoints', () => {
   expect(ds1.bp('s')).toBe(200)
   expect(ds2.bp('s')).toBe('400px')
@@ -151,6 +153,13 @@ test(`toPx`, () => {
   expect(ds1.toPx('1.875rem', 16)).toBe('30px')
 })
 
+test(`parseUnit`, () => {
+  expect(parseUnit('1.875em')).toBe('em')
+  expect(parseUnit('1.875rem')).toBe('rem')
+  expect(parseUnit('1.875  rem')).toBe('rem')
+  expect(parseUnit('18px')).toBe('px')
+  expect(parseUnit('18 px')).toBe('px')
+})
 test('ds.brand', () => {
   expect(ds1.brand('orange')).toBe('#ff9500')
   expect(ds1.brand('teal')).toBe('#1aa5c8')
