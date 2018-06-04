@@ -140,16 +140,15 @@ test('ds.multiply', () => {
 })
 
 test(`pxTo`, () => {
-  expect(pxTo(30, 16, 'em')).toBe('1.875em')
-  expect(pxTo(30, 16, 'rem')).toBe('1.875rem')
-  expect(pxTo(30, 16)).toBe('1.875rem')
-  expect(pxTo(30)).toBe('1.5rem')
-  expect(pxTo(30, 16, 'px')).toBe('1.875px')
+  expect(pxTo('30px', 16, 'em')).toBe('1.875em')
+  expect(pxTo('30px', 16, 'rem')).toBe('1.875rem')
+  expect(pxTo('30px', 20)).toBe('1.5rem')
+  expect(pxTo('30px')).toBe('1.875rem')
 })
 
 test(`toPx`, () => {
   expect(toPx('1.875em', 16)).toBe('30px')
-  expect(toPx('1.875em')).toBe('37.5px')
+  expect(toPx('1.875em')).toBe('30px')
   expect(toPx('1.875rem', 16)).toBe('30px')
 })
 

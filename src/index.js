@@ -75,11 +75,11 @@ export default class DesignSystem {
 }
 
 // Converts px to rem/em
-export const pxTo = (value, base = 20, unit = 'rem') =>
+export const pxTo = (value, base = 16, unit = 'rem') =>
   `${parseFloat(value) / base}${unit}`
 
 // Converts rem/em to px
-export const toPx = (value, base = 20) => `${parseFloat(value) * base}px`
+export const toPx = (value, base = 16) => `${parseFloat(value) * base}px`
 
 export const parseUnit = str => {
   str = String(str)
