@@ -158,7 +158,12 @@ test(`parseUnit`, () => {
   expect(parseUnit('1.875  rem')).toBe('rem')
   expect(parseUnit('18px')).toBe('px')
   expect(parseUnit('18 px')).toBe('px')
+  expect(parseUnit('18 px ')).toBe('px')
+  expect(parseUnit(' 18 px')).toBe('px')
+  expect(parseUnit(' 18 px ')).toBe('px')
+  expect(parseUnit('  18 px ')).toBe('px')
 })
+
 test('ds.brand', () => {
   expect(ds1.brand('orange')).toBe('#ff9500')
   expect(ds1.brand('teal')).toBe('#1aa5c8')
