@@ -47,13 +47,6 @@ Below are the mandatory items that your design system should use. Beyond these, 
     sizes: {
       key: <number | string>,
     },
-
-    // If you're using a modular scale, set it up here
-    // Use these docs to find out more: https://github.com/modularscale/modularscale-js
-    modularscale: {
-      base: <number | array>,  // should be the same as baseFontSize
-      ratio: <number>,
-    },
   },
 
   // Color palette
@@ -103,15 +96,14 @@ export const myDesignSystem = {
   type: {
     baseFontSize: '20px',
 
-    // the values below use modular-scale
     sizes: {
-      xs: -2,
-      s: -1,
-      base: 0, // [default] p, h5, h6
-      m: 1, // h4
-      l: 2, // h3
-      xl: 3, // h2
-      xxl: 4, // h1
+      xs: '16px',
+      s: '20px',
+      base: '30px',
+      m: '36px',
+      l: '42px',
+      xl: '50px',
+      xxl: '58px',
     },
 
     fontFamily: {
@@ -216,7 +208,7 @@ ds.fs('xl', true) // return font-size in px regardless of `option.fontSizeUnit` 
 
 #### Modular scale
 
-**Note: v1.x.x had modular scale functionality built-in, in v2.x.x, this has been removed to reduce file-size for those that don't need a modular scale.**
+**Note: v0.x.x had modular scale functionality built-in, in v1.x.x, this has been removed to reduce file-size for those that don't need a modular scale.**
 
 To make use of a modular scale, there are a few things that need to be done:
 
