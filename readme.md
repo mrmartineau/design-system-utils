@@ -1,16 +1,18 @@
 <h1 align="center">
   design-system-utils
 
-  [![npm](https://img.shields.io/npm/v/design-system-utils.svg?style=flat-square)](https://www.npmjs.com/package/design-system-utils)
-  [![Travis CI Build](https://img.shields.io/travis/mrmartineau/design-system-utils.svg?style=flat-square)](https://travis-ci.org/mrmartineau/design-system-utils)
-  [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-  ![](https://img.shields.io/badge/licence-MIT-blue.svg?style=flat-square)
-  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![npm](https://img.shields.io/npm/v/design-system-utils.svg?style=flat-square)](https://www.npmjs.com/package/design-system-utils)
+[![Travis CI Build](https://img.shields.io/travis/mrmartineau/design-system-utils.svg?style=flat-square)](https://travis-ci.org/mrmartineau/design-system-utils)
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+![](https://img.shields.io/badge/licence-MIT-blue.svg?style=flat-square)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
 </h1>
 
 > Design System Utils is a micro framework that standardises your design-system & provide helpful utilities to access it’s information. It can be used with styled-components, emotion, glamorous or any other CSS-in-JS framework
 
 ## Install
+
 ```sh
 npm i --save design-system-utils
 
@@ -18,9 +20,11 @@ yarn add design-system-utils
 ```
 
 ### Size
-Package size: **883 B unminified** :+1:
+
+Package size: **925 B unminified** :+1:
 
 ## Usage
+
 You first need to create your design system file, this contains all your global variables that your app will use, think font-sizes, color palette, spacing etc. I usually create a top-level directory named `theme` or `designsystem`, and add an index.js inside, like so:
 
 ```js
@@ -36,7 +40,11 @@ export const ds = new DesignSystem(myDesignSystem, {
 ```
 
 ## Setup your design system
-Below are the mandatory items that your design system should use. Beyond these, you can add anything you like.
+
+Below are the **mandatory\*** items that your design system should use. Beyond these, you can add anything you like.
+
+> \* These items are only mandatory if you want to use the shortcut/helper methods like `ds.fontSize`, `ds.bp`, `ds.z`, `ds.color`, `ds.brand`, `ds.spacing` etc.
+
 ```js
 {
   type: {
@@ -91,6 +99,7 @@ Below are the mandatory items that your design system should use. Beyond these, 
 ```
 
 This is an excerpt from the example design-system. See a more complete example in the [example](example/myDesignSystem.js) directory.
+
 ```js
 export const myDesignSystem = {
   type: {
@@ -128,6 +137,7 @@ export const myDesignSystem = {
 ```
 
 ## Initialise the design system framework
+
 ```js
 // myDesignSystem.js
 import DesignSystem from 'design-system'
@@ -138,7 +148,9 @@ export default new DesignSystem(myDesignSystem, {
 ```
 
 ## Accessing the design system data in your app
+
 To access your design system, you just need to `import` it to the current file, like so:
+
 ```js
 import ds from './myDesignSystem'
 ```
@@ -155,7 +167,9 @@ export const Box = styled.div`
   margin: ${ds.space(2)} 0;
 `
 ```
+
 ## Options
+
 There are two options that can be passed to your design system. These relate to font-sizing.
 
 ```js
@@ -171,8 +185,11 @@ export default new DesignSystem(myDesignSystem, {
 ```
 
 ## API methods
+
 ### `ds.get()` - Get any value
+
 The `ds.get()` function can be used to get any value from the design-system. Use object dot notation to find the value you need from your design system object.
+
 ```js
 // with the system setup, as above
 ds.get('lineHeight.headings') // 1.1
@@ -181,12 +198,13 @@ ds.get('lineHeight.headings') // 1.1
 There are a few more helper methods to make finding certain values more simple.
 
 ### `ds.fontSize()` / `ds.fs()` - Get font-size values
+
 The `ds.fontSize()` method is a short-hand for the `ds.get()` method. It can be used to get a breakpoint from the `type.sizes` object.
 
 The `type.sizes` object’s values can be formatted in a few ways:
-* as a string with any unit of measurement, e.g. `s: '13px'` / `px`, `rem` or `em`
-* as a template string using another function to calculate font-sizes, for example a modular-scale, e.g. `${ms(0, modularscale)}px`. **Note: this uses an external package, [modularscale-js](https://github.com/modularscale/modularscale-js)**
 
+- as a string with any unit of measurement, e.g. `s: '13px'` / `px`, `rem` or `em`
+- as a template string using another function to calculate font-sizes, for example a modular-scale, e.g. `${ms(0, modularscale)}px`. **Note: this uses an external package, [modularscale-js](https://github.com/modularscale/modularscale-js)**
 
 ```js
 // define some values// type.sizes object
@@ -212,9 +230,9 @@ ds.fs('xl', true) // return font-size in px regardless of `option.fontSizeUnit` 
 
 To make use of a modular scale, there are a few things that need to be done:
 
-* install the [modularscale-js](https://github.com/modularscale/modularscale-js) package
-* define your modular scale options outside of your design-system object.
-* add the modular scale values to the `type.sizes` object
+- install a modular scale converter package, like [modularscale-js](https://github.com/modularscale/modularscale-js)
+- define your modular scale options outside of your design-system object
+- add the modular scale values to the `type.sizes` object
 
 ```js
 const modularscale = {
@@ -233,8 +251,8 @@ sizes: {
 
 Testing and remembering the values from your modular scale can be tricky, there are two options that can be used, either:
 
-* visit [modularscale.com](https://modularscale.com) and enter your settings, you can then view all the type sizes on the scale you specified
-* or, add the below snippet to your code to print out the values of your scale:
+- visit [modularscale.com](https://modularscale.com) and enter your settings, you can then view all the type sizes on the scale you specified
+- or, add the below snippet to your code to print out the values of your scale:
 
 ```js
 const sizes = ds.get('type.sizes')
@@ -244,6 +262,7 @@ Object.keys(sizes).forEach(item => {
 ```
 
 ### Color palette
+
 There are two possible ways to access color information: the color palette and the brand colors. The color palette is intended to contain all the colors (and their shades) that your app will use, and the brand palette is the specific colors that your brand uses. Two methods can be used to retrieve the values, these are:
 
 ```js
@@ -276,6 +295,7 @@ colors: {
 ```
 
 ### `ds.color()` - Get color palette values
+
 The `ds.color()` function gets values from the `colorPalette` object. It assumes every color has a `base` property and other properties for different shades of the same color.
 This is a short-hand for the `ds.get()` function.
 
@@ -286,8 +306,10 @@ ds.color('bright', 'dark')
 ```
 
 ### `ds.brand()` - Get brand palette values
+
 The `ds.brand()` function gets values from the `colors.brand` object.
 This is a short-hand for the `ds.get()` function.
+
 ```js
 // Get brand values like this:
 ds.brand('orange')
@@ -296,31 +318,40 @@ ds.brand('primary.blue') // it is possible to nest this object as much as you li
 ```
 
 ### `ds.bp()` - Get responsive breakpoint values
+
 The `ds.bp()` method is a short-hand for the `ds.get()` method. It can be used to get a breakpoint from the `breakpoints` object.
+
 ```js
 ds.bp('m')
 ```
 
 ### `ds.z()` - Get `z-index` values
+
 The `ds.z()` method is a short-hand for the `ds.get()` method. It can be used to get a breakpoint from the `zIndex` object.
+
 ```js
 ds.z('low')
 ```
 
 ### `ds.spacing()` / `ds.space()` - Get spacing values
+
 The `ds.spacing()` method returns a value from your `spacing.scale` array. It takes an index for that array and converts the value to pixels.
+
 ```js
 // Example scale array
 // scale: [0, 8, 16, 24, 32, 40]
 
 ds.spacing(2) // '16px'
 ```
+
 Note: `ds.space(2)` can also be used.
 
 ### Calculations
+
 The framework currently provides a few calculation functions, `multiply`, `toPx` and `pxTo`:
 
 #### `ds.multiply()`
+
 ```js
 ds.multiply(10, 2) // 20
 
@@ -333,24 +364,31 @@ ds.multiply('spacing.baseline', 2)
 ```
 
 #### `pxTo()`
+
 Converts `px` to `rem` or `em`
+
 ```js
 import { pxTo } from 'design-system-utils'
-// ds.pxTo(fontSize, baseFontSize, unit)
-ds.pxTo(12, 20, 'rem') // 0.6rem
-ds.pxTo(12, 20, 'em') // 0.6em
+// pxTo(fontSize, baseFontSize, unit - 'rem'/'em')
+pxTo(12, 20, 'rem') // 0.6rem
+pxTo(12, 20, 'em') // 0.6em
 ```
 
 #### `toPx()`
+
 Converts `rem` or `em` value to `px`
+
 ```js
 import { toPx } from 'design-system-utils'
-ds.toPx('1.875rem', 16) // 30px
-ds.toPx('1.875em', 16) // 30px
+// toPx(fontSize, baseFontSize)
+toPx('1.875rem', 16) // 30px
+toPx('1.875em', 16) // 30px
 ```
 
 #### `parseUnit()`
+
 Parses a number and unit string, and returns the unit used
+
 ```js
 import { parseUnit } from 'design-system-utils'
 parseUnit('1.875rem') // 'rem'
@@ -358,6 +396,9 @@ parseUnit('18px') // 'px'
 ```
 
 ## Demo & examples
-I created a demo on [codesandbox.io](https://codesandbox.io/s/91kjlxnm0p), it includes examples of using the design-system utils with [emotion](https://emotion.sh/), [styled-components](https://www.styled-components.com/) and [glamorous](https://glamorous.rocks). There is also a basic example [here](example/).
 
-> Made by [ZΛNDΞR :zap:](https://github.com/mrmartineau/)
+I created a demo on [codesandbox.io](https://codesandbox.io/s/6wrp94x7kk), it includes examples of using the design-system utils with [emotion](https://emotion.sh/), [styled-components](https://www.styled-components.com/) and [glamorous](https://glamorous.rocks). There is also a basic example [here](example/).
+
+## Licence
+
+MIT &copy; [Zander Martineau](https://zander.wtf)
