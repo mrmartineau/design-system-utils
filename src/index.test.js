@@ -1,80 +1,176 @@
-import { ds } from '../example/myDesignSystem'
-import { ds1 } from './testData/ds1'
-import { ds2 } from './testData/ds2'
-import { ds3 } from './testData/ds3'
+import ds1 from './testData/ds1'
+import ds2 from './testData/ds2'
+import DesignSystem from './index'
+
+import { pxTo, toPx, parseUnit } from './index'
 
 test('breakpoints', () => {
-  expect(ds.bp('s')).toBe(300)
   expect(ds1.bp('s')).toBe(200)
   expect(ds2.bp('s')).toBe('400px')
 })
 
 test('z-index', () => {
-  expect(ds.z('low')).toBe(10)
-  expect(ds.z('mid')).toBe(100)
+  expect(ds1.z('low')).toBe(10)
+  expect(ds2.z('mid')).toBe(100)
 })
 
 test('spacing', () => {
-  expect(ds.spacing()).toBe('0px')
-  expect(ds.spacing(3)).toBe('24px')
-  expect(ds.space(2)).toBe('16px')
+  expect(ds1.spacing()).toBe('0px')
+  expect(ds1.spacing(3)).toBe('24px')
+  expect(ds1.space(2)).toBe('16px')
 })
 
-test('font-size - ds', () => {
-  expect(ds.fs('base')).toBe('1rem')
-  expect(ds.fs(0)).toBe('1rem')
-  expect(ds.fs('m')).toBe('1.5rem')
-  expect(ds.fs(1)).toBe('1.5rem')
-})
-
-test('font-size - ds1', () => {
+test('font-size - ds1 - px', () => {
   expect(ds1.fontSize('base')).toBe('30px')
-  expect(ds1.fontSize('base', true)).toBe('30px')
+  expect(ds1.fontSize('l')).toBe('42px')
 })
 
-test('font-size - ds2', () => {
-  expect(ds2.fs('m')).toBe('45px')
-  expect(ds2.fs('m', true)).toBe('45px')
+test('font-size - ds2 - em', () => {
+  expect(ds2.fs('medium')).toBe('1.5em')
+  expect(ds2.fs('large')).toBe('2.4em')
 })
 
-test('font-size - ds3', () => {
-  expect(ds3.fs('m')).toBe('1.5em')
-  expect(ds3.fs('m', true)).toBe('45px')
+test('font-size - rem', () => {
+  const system = {
+    type: {
+      baseFontSize: '20px',
+
+      sizes: {
+        s: '1rem',
+        m: '2rem',
+        l: '3rem',
+      },
+    },
+  }
+
+  const ds = new DesignSystem(system)
+  expect(ds.fontSize('m')).toBe('2rem')
+  expect(ds.fontSize('l')).toBe('3rem')
+})
+
+test('font-size - px to rem', () => {
+  const system = {
+    type: {
+      baseFontSize: '20px',
+
+      sizes: {
+        s: '20px',
+        m: '25px',
+        l: '40px',
+      },
+    },
+  }
+
+  const ds = new DesignSystem(system, {
+    fontSizeUnit: 'rem',
+  })
+  expect(ds.fs('m')).toBe('1.25rem')
+  expect(ds.fs('l')).toBe('2rem')
+})
+
+test('font-size - px to em', () => {
+  const system = {
+    type: {
+      baseFontSize: '20px',
+
+      sizes: {
+        s: '20px',
+        m: '25px',
+        l: '40px',
+      },
+    },
+  }
+
+  const ds = new DesignSystem(system, {
+    fontSizeUnit: 'em',
+  })
+  expect(ds.fs('m')).toBe('1.25em')
+  expect(ds.fs('l')).toBe('2em')
+})
+
+test('font-size - rem to px', () => {
+  const system = {
+    type: {
+      baseFontSize: '20px',
+
+      sizes: {
+        s: '1rem',
+        m: '2rem',
+        l: '3rem',
+      },
+    },
+  }
+
+  const ds = new DesignSystem(system, {
+    fontSizeUnit: 'px',
+  })
+  expect(ds.fs('m')).toBe('40px')
+  expect(ds.fs('l')).toBe('60px')
+})
+
+test('font-size - px to px', () => {
+  const system = {
+    type: {
+      baseFontSize: '20px',
+
+      sizes: {
+        s: '20px',
+        m: '25px',
+        l: '40px',
+      },
+    },
+  }
+
+  const ds = new DesignSystem(system, {
+    fontSizeUnit: 'px',
+  })
+  expect(ds.fs('m')).toBe('25px')
+  expect(ds.fs('l')).toBe('40px')
 })
 
 test('get', () => {
-  expect(ds.get('type.baseFontSize')).toBe('20px')
   expect(ds1.get('type.baseFontSize')).toBe('30px')
   expect(ds2.get('type.baseFontSize')).toBe('30px')
 })
 
 test('ds.multiply', () => {
-  expect(ds.multiply(20, 2)).toBe(40)
-  expect(ds.multiply('type.baseFontSize', 2)).toBe(40)
-  expect(ds.multiply('spacing.baseline', 2)).toBe(40)
+  expect(ds1.multiply(20, 2)).toBe(40)
+  expect(ds1.multiply('type.baseFontSize', 2)).toBe(60)
+  expect(ds1.multiply('spacing.baseline', 2)).toBe(40)
 })
 
 test(`pxTo`, () => {
-  expect(ds.pxTo(30, 16, 'em')).toBe('1.875em')
-  expect(ds.pxTo(30, 16, 'rem')).toBe('1.875rem')
-  expect(ds.pxTo(30, 16)).toBe('1.875rem')
-  expect(ds.pxTo(30)).toBe('1.5rem')
-  expect(ds.pxTo(30, 16, 'px')).toBe('1.875px')
+  expect(pxTo('30px', 16, 'em')).toBe('1.875em')
+  expect(pxTo('30px', 16, 'rem')).toBe('1.875rem')
+  expect(pxTo('30px', 20)).toBe('1.5rem')
+  expect(pxTo('30px')).toBe('1.875rem')
 })
 
 test(`toPx`, () => {
-  expect(ds.toPx('1.875em', 16)).toBe('30px')
-  expect(ds.toPx('1.875em')).toBe('37.5px')
-  expect(ds.toPx('1.875rem', 16)).toBe('30px')
+  expect(toPx('1.875em', 16)).toBe('30px')
+  expect(toPx('1.875em')).toBe('30px')
+  expect(toPx('1.875rem', 16)).toBe('30px')
+})
+
+test(`parseUnit`, () => {
+  expect(parseUnit('1.875em')).toBe('em')
+  expect(parseUnit('1.875rem')).toBe('rem')
+  expect(parseUnit('1.875  rem')).toBe('rem')
+  expect(parseUnit('18px')).toBe('px')
+  expect(parseUnit('18 px')).toBe('px')
+  expect(parseUnit('18 px ')).toBe('px')
+  expect(parseUnit(' 18 px')).toBe('px')
+  expect(parseUnit(' 18 px ')).toBe('px')
+  expect(parseUnit('  18 px ')).toBe('px')
 })
 
 test('ds.brand', () => {
-  expect(ds.brand('orange')).toBe('#ff9500')
-  expect(ds.brand('teal')).toBe('#1aa5c8')
+  expect(ds1.brand('orange')).toBe('#ff9500')
+  expect(ds1.brand('teal')).toBe('#1aa5c8')
 })
 
 test('ds.color', () => {
-  expect(ds.color('primary')).toBe('#181830')
-  expect(ds.color('secondary', 'light')).toBe('#fea04c')
-  expect(ds.color('text', 'dark')).toBeUndefined()
+  expect(ds1.color('primary')).toBe('#181830')
+  expect(ds1.color('secondary', 'light')).toBe('#fea04c')
+  expect(ds1.color('text', 'dark')).toBeUndefined()
 })

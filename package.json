@@ -1,6 +1,6 @@
 {
   "name": "design-system-utils",
-  "version": "0.12.1",
+  "version": "1.0.0",
   "description": "Design-system utils for working with JS-in-CSS",
   "main": "./cjs/index.js",
   "module": "./src/index.js",
@@ -24,8 +24,9 @@
     "test:coverage": "jest --coverage",
     "build": "babel src -d cjs --ignore spec.js,test.js,testData",
     "prepublishOnly": "npm run build",
-    "format:js": "prettier --config .prettierrc --write '{src,example}/**/*.js'",
-    "lint:js": "standard"
+    "prelint:js": "npm run format:all",
+    "lint:js": "eslint ./src/**/*.js",
+    "format:all": "prettier --write '{src,example}/**/*'"
   },
   "keywords": [
     "css-in-js",
@@ -39,25 +40,16 @@
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.3",
     "babel-preset-env": "^1.7.0",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
     "jest": "^23.0.1",
     "prettier": "^1.13.2",
-    "size-limit": "^0.18.1",
-    "standard": "^11.0.0"
+    "size-limit": "^0.18.1"
   },
   "dependencies": {
-    "modularscale-js": "^3.0.1",
     "object-get": "^2.1.0"
-  },
-  "standard": {
-    "globals": [
-      "expect",
-      "test"
-    ]
-  },
-  "jest": {
-    "coveragePathIgnorePatterns": [
-      "./cjs"
-    ]
   }
 }

@@ -21,18 +21,13 @@ export const myDesignSystem = {
     baseFontSize: '20px',
 
     sizes: {
-      xs: -2,
-      s: -1,
-      base: 0, // [default] p, h5, h6
-      m: 1, // h4
-      l: 2, // h3
-      xl: 3, // h2
-      xxl: 4, // h1
-    },
-
-    modularscale: {
-      base: 20, // should be the same as baseFontSize
-      ratio: 1.5,
+      xs: '16px',
+      s: '20px',
+      base: '30px',
+      m: '36px',
+      l: '42px',
+      xl: '50px',
+      xxl: '58px',
     },
 
     fontFamily,
@@ -100,7 +95,6 @@ export const myDesignSystem = {
   borderRadius: '0.3em',
 }
 
-export const ds = new DesignSystem(myDesignSystem, {
-  useModularScale: true,
+export default new DesignSystem(myDesignSystem, {
   fontSizeUnit: 'rem',
 })

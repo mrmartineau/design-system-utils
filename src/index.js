@@ -1,17 +1,12 @@
 import objectGet from 'object-get'
-import ms from 'modularscale-js'
 
 export default class DesignSystem {
   constructor(system, options) {
     const defaultOptions = {
-      defaultUnit: 'px',
-      useModularScale: true,
-      fontSizeUnit: 'rem',
+      fontSizeUnit: undefined,
     }
-    this.options = Object.assign({}, defaultOptions, options)
+    this.opts = Object.assign({}, defaultOptions, options)
     this.ds = system
-    this.pxTo = (value, base = 20, unit = 'rem') => `${value / base}${unit}`
-    this.toPx = (value, base = 20) => `${parseFloat(value) * base}px`
   }
 
   multiply(initial, multiplier) {
@@ -36,34 +31,30 @@ export default class DesignSystem {
     return this.get(z, this.ds.zIndex)
   }
 
-  fontSize(size, toPxl = false) {
-    let output
-    if (this.options.useModularScale) {
-      const value =
-        typeof size === 'number' ? size : this.get(size, this.ds.type.sizes)
-      output = ms(value, this.ds.type.modularscale)
-    } else {
-      output = this.get(size, this.ds.type.sizes)
+  fontSize(size) {
+    const output = `${this.get(size, this.ds.type.sizes)}`
+    const baseFontSize = parseFloat(this.ds.type.baseFontSize)
+
+    // Don't convert the value if we don't have to
+    if (parseUnit(output) === this.opts.fontSizeUnit) {
+      return output
     }
 
-    const untransformedOutput = `${output}px`
-
-    if (toPxl) {
-      return untransformedOutput
-    }
-
-    switch (this.options.fontSizeUnit) {
+    // Convert font-size to the specified unit
+    switch (this.opts.fontSizeUnit) {
       case 'rem':
-        return this.pxTo(output, parseFloat(this.ds.type.baseFontSize), 'rem')
+        return pxTo(output, baseFontSize, 'rem')
       case 'em':
-        return this.pxTo(output, parseFloat(this.ds.type.baseFontSize), 'em')
+        return pxTo(output, baseFontSize, 'em')
+      case 'px':
+        return toPx(output, baseFontSize)
       default:
-        return untransformedOutput
+        return output
     }
   }
 
-  fs(size, toPxl = false) {
-    return this.fontSize(size, toPxl)
+  fs(size) {
+    return this.fontSize(size)
   }
 
   spacing(index = 0) {
@@ -82,3 +73,12 @@ export default class DesignSystem {
     return this.get(color, this.ds.colors.brand)
   }
 }
+
+// Converts px to rem/em
+export const pxTo = (value, base = 16, unit = 'rem') =>
+  `${parseFloat(value) / base}${unit}`
+
+// Converts rem/em to px
+export const toPx = (value, base = 16) => `${parseFloat(value) * base}px`
+
+export const parseUnit = str => str.trim().match(/[\d.\-\+]*\s*(.*)/)[1] || ''

@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 
 // import the design-system
-import { ds } from './myDesignSystem'
+import ds from './myDesignSystem'
 
 // We can use styled-components or glamorous
 import glamorous from 'glamorous'

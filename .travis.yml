@@ -6,5 +6,5 @@ node_js:
 cache: yarn
 
 script:
- - npm test
- - npm run size
+ - yarn test
+ - yarn size

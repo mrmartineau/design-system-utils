@@ -1,0 +1,15 @@
+{
+  "plugins": ["prettier"],
+  "rules": {
+    "no-console": "off",
+    "prettier/prettier": "warn"
+  },
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true
+  }
+}
