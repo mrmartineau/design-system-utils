@@ -2,41 +2,98 @@
 // Project: design-system-utils
 // Definitions by: Zander Martineau https://zander.wtf
 
-export default class DesignSystem {
-  constructor(system: object, options?: object)
+export interface Options {
+  fontSizeUnit?: string
+}
+
+export interface System {
+  [prop: string]: any
+  type?: {
+    baseFontSize?: string | number
+    sizes?: {
+      [size: string]: string | number
+    }
+
+    fontFamily?: {
+      [family: string]: string
+    }
+    fontFamilyBase?: string
+    fontFamilyHeadings?: string
+
+    lineHeight?: {
+      [name: string]: string | number
+    }
+
+    fontWeight?: {
+      [name: string]: string | number
+    }
+  }
+  breakpoints?: {
+    [name: string]: string | number
+  }
+  colors?: {
+    brand?: {
+      [name: string]: string
+    }
+    colorPalette?: {
+      [name: string]: {
+        base: string
+        [variant: string]: string
+      }
+    }
+  }
+  zIndex?: {
+    [name: string]: number
+  }
+  spacing?: {
+    scale: Array<number | string>
+  }
+}
+
+export default class DesignSystem<T extends System> {
+  constructor(system: T, options?: Options)
 
   /*~ multiply a given value */
-  multiply(initial: any, multiplier: number): any
+  multiply(initial: any, multiplier: number): number
 
   /*~ get a value from the design system object */
   get(val: string, obj?: object): any
 
   /*~ get a breakpoint value from the design system object */
-  bp(bp: string): any
+  bp(bp: keyof T['breakpoints']): T['breakpoints']
 
   /*~ get a z-index value from the design system object */
-  z(z: string): any
+  z(z: keyof T['zIndex']): keyof T['zIndex']
 
   /*~ get a font-size value from the design system object */
-  fontSize(size: string): string
+  fontSize(
+    size: keyof NonNullable<T['type']>['sizes']
+  ): NonNullable<T['type']>['sizes']
 
   /*~ get a font-size value from the design system object */
-  fs(size: string): string
+  fs(
+    size: keyof NonNullable<T['type']>['sizes']
+  ): NonNullable<T['type']>['sizes']
 
   /*~ get a spacing value from the design system object */
-  spacing(index?: number): string
+  spacing(index?: number): NonNullable<T['spacing']>['scale']
 
   /*~ get a spacing value from the design system object */
-  space(index?: number): string
+  space(index?: number): NonNullable<T['spacing']>['scale']
 
   /*~ get a color from your color palette */
-  color(hue: string, value?: string): string
+  color<
+    Hue extends keyof NonNullable<T['colors']>['colorPalette'],
+    Val extends keyof NonNullable<T['colors']>['colorPalette'][Hue]
+  >(hue: Hue, value?: Val): NonNullable<T['colors']>['colorPalette'][Hue]
 
   /*~ get a color from your brand color palette */
-  brand(color: string): string
+  brand(
+    color: keyof NonNullable<T['colors']>['brand']
+  ): NonNullable<T['colors']>['brand']
 
   /*~ the design-system itself */
-  designSystem: object
+  designSystem: T
 }
 
 /*~ converts a `rem` or `em` value to `px` */

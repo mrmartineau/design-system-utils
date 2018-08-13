@@ -10,12 +10,9 @@ export default class DesignSystem {
   }
 
   multiply(initial, multiplier) {
-    let initialVal
-    if (typeof initial === 'string') {
-      initialVal = parseFloat(this.get(initial))
-    } else {
-      initialVal = initial
-    }
+    const initialVal =
+      typeof initial === 'string' ? parseFloat(this.get(initial)) : initial
+
     return initialVal * multiplier
   }
 
@@ -81,4 +78,4 @@ export const pxTo = (value, base = 16, unit = 'rem') =>
 // Converts rem/em to px
 export const toPx = (value, base = 16) => `${parseFloat(value) * base}px`
 
-export const parseUnit = str => str.trim().match(/[\d.\-\+]*\s*(.*)/)[1] || ''
+export const parseUnit = str => str.trim().match(/[\d.\-+]*\s*(.*)/)[1] || ''
