@@ -47,7 +47,7 @@
     "eslint-plugin-prettier": "^2.6.0",
     "jest": "^23.0.1",
     "prettier": "^1.13.2",
-    "size-limit": "^0.18.1"
+    "size-limit": "^0.19.3"
   },
   "dependencies": {
     "object-get": "^2.1.0"
