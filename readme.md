@@ -333,18 +333,30 @@ The `ds.z()` method is a short-hand for the `ds.get()` method. It can be used to
 ds.z('low')
 ```
 
-### `ds.spacing()` / `ds.space()` - Get spacing values
+### `tokens.spacing()` or `tokens.space()` - Get spacing values
 
-The `ds.spacing()` method returns a value from your `spacing.scale` array. It takes an index for that array and converts the value to pixels.
+The `tokens.spacing()` method returns a value from your `spacing.scale` definition. The spacing data could either be an array, or an object.
+
+- If an array, it takes an `index` (number) for that array e.g. `tokens.space(2)`
+- If an object, it takes a `key` (string) for the item in that object e.g. `tokens.space('m')`
 
 ```js
-// Example scale array
-// scale: [0, 8, 16, 24, 32, 40]
+// Array example:
+scale: [0, 8, 16, 24, 32, 40]
 
-ds.spacing(2) // '16px'
+tokens.spacing(2) // '16px'
+// Note: `tokens.space(2)` can also be used
+
+// Object example:
+scale: {
+  s: '10rem',
+  m: '100rem',
+  l: '1000rem',
+}
+
+tokens.spacing('m') // '100rem'
+// Note: `tokens.space('m')` can also be used
 ```
-
-Note: `ds.space(2)` can also be used.
 
 ### Calculations
 

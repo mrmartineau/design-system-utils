@@ -15,9 +15,14 @@ test('z-index', () => {
 })
 
 test('spacing', () => {
-  expect(ds1.spacing()).toBe('0px')
+  expect(ds1.spacing(0)).toBe('0')
   expect(ds1.spacing(3)).toBe('24px')
   expect(ds1.space(2)).toBe('16px')
+
+  // when using an object
+  expect(ds2.space('s')).toBe('10rem')
+  expect(ds2.space('m')).toBe('100rem')
+  expect(ds2.space('l')).toBe('1000rem')
 })
 
 test('font-size - ds1 - px', () => {

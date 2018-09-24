@@ -46,7 +46,11 @@ export interface System {
     [name: string]: number
   }
   spacing?: {
-    scale: Array<number | string>
+    scale:
+      | Array<number | string>
+      | {
+          [size: string]: string | number
+        }
   }
 }
 
