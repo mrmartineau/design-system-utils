@@ -1,16 +1,38 @@
 <h1 align="center">
   👩‍🎨 <br/>
-  design-system-utils
+  Design System Utils
 
 [![npm](https://img.shields.io/npm/v/design-system-utils.svg?style=flat-square)](https://www.npmjs.com/package/design-system-utils)
 [![Travis CI Build](https://img.shields.io/travis/mrmartineau/design-system-utils.svg?style=flat-square)](https://travis-ci.org/mrmartineau/design-system-utils)
-[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![](https://img.shields.io/badge/licence-MIT-blue.svg?style=flat-square)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 </h1>
 
-> Design System Utils is a micro framework that standardises your design-system & provide helpful utilities to access it’s information. It can be used with styled-components, emotion, glamorous or any other CSS-in-JS framework
+Design System Utils is a micro framework that standardises your design-system tokens & provides helpful utility functions to access it’s information. It can be used with [styled-components](https://styled-components.com), [emotion](https://emotion.sh), [glamorous](https://glamorous.rocks/) or any other [CSS-in-JS framework](https://css-in-js-playground.com/).
+
+<details>
+  <summary>Table of contents</summary>
+
+- [Install](#install)
+- [Usage](#usage)
+  - [Setting up your design system](#setting-up-your-design-system)
+  - [Initialise the design system framework](#initialise-the-design-system-framework)
+  - [Accessing the design system data in your app](#accessing-the-design-system-data-in-your-app)
+- [Options](#options)
+- [API methods](#api-methods)
+  - [`tokens.get()` - Get any value from the design tokens](#tokensget---get-any-value-from-the-design-tokens)
+  - [`tokens.fontSize()` or `tokens.fs()` - Get font-size values](#tokensfontsize-or-tokensfs---get-font-size-values)
+  - [Color palette](#color-palette)
+    - [`tokens.color()` - Get color palette values](#tokenscolor---get-color-palette-values)
+    - [`tokens.brand()` - Get brand palette values](#tokensbrand---get-brand-palette-values)
+  - [`tokens.bp()` - Get responsive breakpoint values](#tokensbp---get-responsive-breakpoint-values)
+  - [`tokens.z()` - Get `z-index` values](#tokensz---get-z-index-values)
+  - [`tokens.spacing()` or `tokens.space()` - Get spacing values](#tokensspacing-or-tokensspace---get-spacing-values)
+  - [Calculations](#calculations)
+- [Demo & examples](#demo--examples)
+
+</details>
 
 ## Install
 
@@ -24,14 +46,23 @@ npm install --save design-system-utils
 
 ### Size
 
-Package size: **925 B unminified** 👍
+Package size: **762 B unminified** 👍
 
 ## Usage
 
-You first need to create your design system file, this contains all your design tokens that your app or site will use, think font-sizes, color palette, spacing etc. I usually create a top-level directory named `tokens`, `theme` or `designsystem`, and add an index.js inside, like so:
+First create your design system file, this contains all your design tokens that your app or site will use; things like font-sizes, color palette, spacing etc (kind of like a Sass/Less variables file).
+
+For example you can create a top-level directory named `tokens`, `theme` or `designsystem`, and add an index.js inside, like so:
+
+```
+./tokens
+└── index.js
+```
+
+A simple version of a tokens file with Design System Utils:
 
 ```js
-// ./theme/index.js
+// ./tokens/index.js
 import DesignSystem from 'design-system-utils'
 
 // your design tokens object goes here, see below for further details
@@ -40,9 +71,11 @@ const designTokens = {...}
 export default new DesignSystem(designTokens)
 ```
 
-## Setup your design system
+### Setting up your design system
 
-The "shape" and structure of your design tokens object _can_ actually be anything you want, however, if you want to make use of the shortcut/helper methods like `tokens.fontSize|bp|z|color|brand|spacing` etc, there is a particular shape that your data will need to follow, see here:
+The "shape" and structure of your design tokens object **_can_** actually be anything you want, however, if you want to make use of the shortcut/helper methods like `tokens.fontSize|bp|z|color|brand|spacing` etc, there is a particular shape that your data will need to follow, see below:
+
+(🤔 the below code snippet includes some psuedo types for the values that occur in the different parts of the tokens object)
 
 ```js
 {
@@ -98,10 +131,10 @@ The "shape" and structure of your design tokens object _can_ actually be anythin
 }
 ```
 
-This is an excerpt from the example design-system. See a more complete example in the [example](example/myDesignSystem.js) directory.
+Below is an excerpt from the example design-system. See a more complete version in the [`/example`](example/myDesignSystem.js) directory or some that are used in the design-system-utils tests: [1](https://github.com/mrmartineau/design-system-utils/blob/master/src/testData/ds1.js) & [2](https://github.com/mrmartineau/design-system-utils/blob/master/src/testData/ds1.js).
 
 ```js
-export const myDesignSystem = {
+const designTokens = {
   type: {
     baseFontSize: '20px',
 
@@ -136,7 +169,7 @@ export const myDesignSystem = {
 }
 ```
 
-## Initialise the design system framework
+### Initialise the design system framework
 
 ```js
 // myDesignSystem.js
@@ -150,15 +183,15 @@ export default new DesignSystem(designTokens)
 To access your design system, you just need to `import` it to the current file, like so:
 
 ```js
-import tokens from './myDesignSystem' // assuming you exported `default` from your design system file
+import tokens from './tokens' // assuming you exported `default` from your design system file
 ```
 
-Here I have created a very simple component using the design system and [styled-components](https://styled-components.com), you should be able to see how easy it is to pull information from the design system.
+Here is a very simple component using [styled-components](https://styled-components.com) and some values from the tokens, you should be able to see how easy it is to pull information from the design system.
 
 ```js
-// Example uses styled-components
+// Example using styled-components
 import styled from 'styled-component'
-import tokens from './myDesignSystem'
+import tokens from './tokens'
 
 export const Box = styled.div`
   font-family: ${tokens.get('type.fontFamilyBase')};
@@ -169,7 +202,7 @@ export const Box = styled.div`
 
 ## Options
 
-There is one option that can be passed to your design system, it relates to font-sizing:
+There is only one option that can be passed to your design system class, it relates to font-sizing:
 
 ```js
 // Use default options. do not convert the font-sizes to rems or ems
@@ -298,7 +331,7 @@ colors: {
 },
 ```
 
-### `tokens.color()` - Get color palette values
+#### `tokens.color()` - Get color palette values
 
 The `tokens.color()` function gets values from the `colorPalette` object. It assumes every color has a `base` property and other properties for different shades of the same color.
 This is a short-hand for the `tokens.get()` function.
@@ -309,7 +342,7 @@ tokens.color('bright') // #F9FAFB - the `base` key is the default, so it is not 
 tokens.color('bright', 'dark')
 ```
 
-### `tokens.brand()` - Get brand palette values
+#### `tokens.brand()` - Get brand palette values
 
 The `tokens.brand()` function gets values from the `colors.brand` object.
 This is a short-hand for the `tokens.get()` function.
@@ -339,19 +372,23 @@ tokens.z('low')
 
 ### `tokens.spacing()` or `tokens.space()` - Get spacing values
 
-The `tokens.spacing()` method returns a value from your `spacing.scale` definition. The spacing data could either be an array, or an object.
+The `tokens.spacing()` method returns a value from your `spacing.scale` definition. **The spacing data could either be an array, or an object.**
 
 - If an array, it takes an `index` (number) for that array e.g. `tokens.space(2)`
 - If an object, it takes a `key` (string) for the item in that object e.g. `tokens.space('m')`
 
+#### Array example:
+
 ```js
-// Array example:
 scale: [0, 8, 16, 24, 32, 40]
 
 tokens.spacing(2) // '16px'
 // Note: `tokens.space(2)` can also be used
+```
 
-// Object example:
+#### Object example:
+
+```js
 scale: {
   s: '10rem',
   m: '100rem',
