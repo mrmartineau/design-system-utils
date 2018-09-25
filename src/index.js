@@ -2,10 +2,13 @@ import objectGet from 'object-get'
 
 export default class DesignSystem {
   constructor(system, options) {
-    const defaultOptions = {
-      fontSizeUnit: undefined,
-    }
-    this.opts = Object.assign({}, defaultOptions, options)
+    this.opts = Object.assign(
+      {},
+      {
+        fontSizeUnit: undefined,
+      },
+      options
+    )
     this.ds = system
   }
 

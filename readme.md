@@ -46,7 +46,7 @@ npm install --save design-system-utils
 
 ### Size
 
-Package size: **762 B unminified** 👍
+Package size: **910 B minified and gzipped** 👍
 
 ## Usage
 
