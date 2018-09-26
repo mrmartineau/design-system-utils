@@ -2,10 +2,13 @@ import objectGet from 'object-get'
 
 export default class DesignSystem {
   constructor(system, options) {
-    const defaultOptions = {
-      fontSizeUnit: undefined,
-    }
-    this.opts = Object.assign({}, defaultOptions, options)
+    this.opts = Object.assign(
+      {},
+      {
+        fontSizeUnit: undefined,
+      },
+      options
+    )
     this.ds = system
   }
 
@@ -54,12 +57,16 @@ export default class DesignSystem {
     return this.fontSize(size)
   }
 
-  spacing(index = 0) {
-    return `${this.ds.spacing.scale[index]}px`
+  spacing(val) {
+    if (typeof val === 'string') {
+      return this.get(val, this.ds.spacing.scale)
+    }
+
+    return this.ds.spacing.scale[val]
   }
 
-  space(index) {
-    return this.spacing(index)
+  space(val) {
+    return this.spacing(val)
   }
 
   color(hue, value = 'base') {
@@ -78,4 +85,5 @@ export const pxTo = (value, base = 16, unit = 'rem') =>
 // Converts rem/em to px
 export const toPx = (value, base = 16) => `${parseFloat(value) * base}px`
 
+// Parses a number and unit string, and returns the unit used
 export const parseUnit = str => str.trim().match(/[\d.\-+]*\s*(.*)/)[1] || ''

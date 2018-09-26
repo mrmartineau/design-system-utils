@@ -1,59 +1,92 @@
 <h1 align="center">
-  design-system-utils
+  👩‍🎨 <br/>
+  Design System Utils
 
 [![npm](https://img.shields.io/npm/v/design-system-utils.svg?style=flat-square)](https://www.npmjs.com/package/design-system-utils)
 [![Travis CI Build](https://img.shields.io/travis/mrmartineau/design-system-utils.svg?style=flat-square)](https://travis-ci.org/mrmartineau/design-system-utils)
-[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![](https://img.shields.io/badge/licence-MIT-blue.svg?style=flat-square)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 </h1>
 
-> Design System Utils is a micro framework that standardises your design-system & provide helpful utilities to access it’s information. It can be used with styled-components, emotion, glamorous or any other CSS-in-JS framework
+Design System Utils is a micro framework that standardises your design-system tokens & provides helpful utility functions to access it’s information. It can be used with [styled-components](https://styled-components.com), [emotion](https://emotion.sh), [glamorous](https://glamorous.rocks/) or any other [CSS-in-JS framework](https://css-in-js-playground.com/).
+
+<details>
+  <summary>Table of contents</summary>
+
+- [Install](#install)
+- [Usage](#usage)
+  - [Setting up your design system](#setting-up-your-design-system)
+  - [Initialise the design system framework](#initialise-the-design-system-framework)
+  - [Accessing the design system data in your app](#accessing-the-design-system-data-in-your-app)
+- [Options](#options)
+- [API methods](#api-methods)
+  - [`tokens.get()` - Get any value from the design tokens](#tokensget---get-any-value-from-the-design-tokens)
+  - [`tokens.fontSize()` or `tokens.fs()` - Get font-size values](#tokensfontsize-or-tokensfs---get-font-size-values)
+  - [Color palette](#color-palette)
+    - [`tokens.color()` - Get color palette values](#tokenscolor---get-color-palette-values)
+    - [`tokens.brand()` - Get brand palette values](#tokensbrand---get-brand-palette-values)
+  - [`tokens.bp()` - Get responsive breakpoint values](#tokensbp---get-responsive-breakpoint-values)
+  - [`tokens.z()` - Get `z-index` values](#tokensz---get-z-index-values)
+  - [`tokens.spacing()` or `tokens.space()` - Get spacing values](#tokensspacing-or-tokensspace---get-spacing-values)
+  - [Calculations](#calculations)
+- [Demo & examples](#demo--examples)
+
+</details>
 
 ## Install
 
 ```sh
-npm i --save design-system-utils
-
 yarn add design-system-utils
+
+# or
+
+npm install --save design-system-utils
 ```
 
 ### Size
 
-Package size: **925 B unminified** :+1:
+Package size: **910 B minified and gzipped** 👍
 
 ## Usage
 
-You first need to create your design system file, this contains all your global variables that your app will use, think font-sizes, color palette, spacing etc. I usually create a top-level directory named `theme` or `designsystem`, and add an index.js inside, like so:
+First create your design system file, this contains all your design tokens that your app or site will use; things like font-sizes, color palette, spacing etc (kind of like a Sass/Less variables file).
 
-```js
-// ./theme/index.js
-import DesignSystem from 'design-system-utils'
+For example you can create a top-level directory named `tokens`, `theme` or `designsystem`, and add an index.js inside, like so:
 
-// your design-system goes here, see below for details
-export const myDesignSystem = {...}
-
-export const ds = new DesignSystem(myDesignSystem, {
-  fontSizeUnit: 'rem',
-})
+```
+./tokens
+└── index.js
 ```
 
-## Setup your design system
+A simple version of a tokens file with Design System Utils:
 
-Below are the **mandatory\*** items that your design system should use. Beyond these, you can add anything you like.
+```js
+// ./tokens/index.js
+import DesignSystem from 'design-system-utils'
 
-> \* These items are only mandatory if you want to use the shortcut/helper methods like `ds.fontSize`, `ds.bp`, `ds.z`, `ds.color`, `ds.brand`, `ds.spacing` etc.
+// your design tokens object goes here, see below for further details
+const designTokens = {...}
+
+export default new DesignSystem(designTokens)
+```
+
+### Setting up your design system
+
+The "shape" and structure of your design tokens object **_can_** actually be anything you want, however, if you want to make use of the shortcut/helper methods like `tokens.fontSize|bp|z|color|brand|spacing` etc, there is a particular shape that your data will need to follow, see below:
+
+(🤔 the below code snippet includes some psuedo types for the values that occur in the different parts of the tokens object)
 
 ```js
 {
   type: {
     // this should be set as a px value if you have `options.fontSizeUnit` set
     // to 'rem' or 'em' so that the lib can convert the values properly
-    baseFontSize: <string>,
+    baseFontSize: '' // string,
 
+    // used with `tokens.fs('size')` or `tokens.fontSize('size')`
     sizes: {
-      key: <number | string>,
+      key: '' // <number | string>,
     },
   },
 
@@ -65,13 +98,13 @@ Below are the **mandatory\*** items that your design system should use. Beyond t
     // Used with `ds.color('colorName')`
     colorPalette: {
       colorName: {
-        base: <string>, // base is the default
+        base: '' // <string>, // base is the default
       },
     },
 
     // Used with `ds.brand('colorName)`
     brand: {
-      colorName: <string>, // base is the default
+      colorName: '' // <string>, base is the default
     }
   },
 
@@ -81,27 +114,27 @@ Below are the **mandatory\*** items that your design system should use. Beyond t
   // Have as many breakpoints as you like
   // Values can be use any unit you like
   breakpoints: {
-    key: <number | string>,
+    key: '' // <number | string>,
   },
 
   // Z-index
   // Used with `ds.z()`
   zIndex: {
-    key: <number>
+    key: 10 // <number>
   },
 
   // Spacing
   // Used with `ds.spacing()` or `ds.space()`
   spacing: {
-    scale: <array>[<number | string>, ...],
+    scale: [] // <array>[<number | string>, ...], <object>
   },
 }
 ```
 
-This is an excerpt from the example design-system. See a more complete example in the [example](example/myDesignSystem.js) directory.
+Below is an excerpt from the example design-system. See a more complete version in the [`/example`](example/myDesignSystem.js) directory or some that are used in the design-system-utils tests: [1](https://github.com/mrmartineau/design-system-utils/blob/master/src/testData/ds1.js) & [2](https://github.com/mrmartineau/design-system-utils/blob/master/src/testData/ds1.js).
 
 ```js
-export const myDesignSystem = {
+const designTokens = {
   type: {
     baseFontSize: '20px',
 
@@ -136,15 +169,13 @@ export const myDesignSystem = {
 }
 ```
 
-## Initialise the design system framework
+### Initialise the design system framework
 
 ```js
 // myDesignSystem.js
 import DesignSystem from 'design-system'
-export const myDesignSystem {...} // your design-system goes here
-export default new DesignSystem(myDesignSystem, {
-  fontSizeUnit: 'rem',
-})
+const designTokens = {...}
+export default new DesignSystem(designTokens)
 ```
 
 ## Accessing the design system data in your app
@@ -152,28 +183,29 @@ export default new DesignSystem(myDesignSystem, {
 To access your design system, you just need to `import` it to the current file, like so:
 
 ```js
-import ds from './myDesignSystem'
+import tokens from './tokens' // assuming you exported `default` from your design system file
 ```
 
-Here I have created a very simple component using the design system and [styled-components](https://styled-components.com), you should be able to see how easy it is to pull information from the design system.
+Here is a very simple component using [styled-components](https://styled-components.com) and some values from the tokens, you should be able to see how easy it is to pull information from the design system.
 
 ```js
-// Example uses styled-components
+// Example using styled-components
 import styled from 'styled-component'
-import ds from './myDesignSystem'
+import tokens from './tokens'
+
 export const Box = styled.div`
-  font-family: ${ds.get('type.fontFamilyBase')};
-  background-color: ${ds.brand('primary')};
-  margin: ${ds.space(2)} 0;
+  font-family: ${tokens.get('type.fontFamilyBase')};
+  background-color: ${tokens.brand('primary')};
+  margin: ${tokens.space(2)} 0;
 `
 ```
 
 ## Options
 
-There are two options that can be passed to your design system. These relate to font-sizing.
+There is only one option that can be passed to your design system class, it relates to font-sizing:
 
 ```js
-// Use default options
+// Use default options. do not convert the font-sizes to rems or ems
 export default new DesignSystem(myDesignSystem)
 
 // OR: with custom options
@@ -181,25 +213,26 @@ export default new DesignSystem(myDesignSystem, {
   // this is used to convert your `type.sizes` values from one unit to another
   // e.g. to convert all `px` sizes  to `rem`, set this option:
   fontSizeUnit: 'rem',
+  // this means you can define values using px and use rems in your app
 })
 ```
 
 ## API methods
 
-### `ds.get()` - Get any value
+### `tokens.get()` - Get any value from the design tokens
 
-The `ds.get()` function can be used to get any value from the design-system. Use object dot notation to find the value you need from your design system object.
+The `tokens.get()` function can be used to get any value from the design-system. Use object dot notation to find the value you need from your design system object.
 
 ```js
 // with the system setup, as above
-ds.get('lineHeight.headings') // 1.1
+tokens.get('lineHeight.headings') // 1.1
 ```
 
 There are a few more helper methods to make finding certain values more simple.
 
-### `ds.fontSize()` / `ds.fs()` - Get font-size values
+### `tokens.fontSize()` or `tokens.fs()` - Get font-size values
 
-The `ds.fontSize()` method is a short-hand for the `ds.get()` method. It can be used to get a breakpoint from the `type.sizes` object.
+The `tokens.fontSize()` method is a short-hand for the `tokens.get()` method. It can be used to get a value from the `type.sizes` object.
 
 The `type.sizes` object’s values can be formatted in a few ways:
 
@@ -219,9 +252,9 @@ sizes: {
 },
 
 // retrieve some values
-ds.fontSize('xl')
-ds.fs('xl') // `ds.fs()` is a short-hand alias for `ds.fontSize()`
-ds.fs('xl', true) // return font-size in px regardless of `option.fontSizeUnit` value
+tokens.fontSize('xl')
+tokens.fs('xl') // `tokens.fs()` is a short-hand alias for `tokens.fontSize()`
+tokens.fs('xl', true) // return font-size in px regardless of `option.fontSizeUnit` value
 ```
 
 #### Modular scale
@@ -255,7 +288,7 @@ Testing and remembering the values from your modular scale can be tricky, there 
 - or, add the below snippet to your code to print out the values of your scale:
 
 ```js
-const sizes = ds.get('type.sizes')
+const sizes = tokens.get('type.sizes')
 Object.keys(sizes).forEach(item => {
   console.log(item, ':', sizes[item]) // e.g. `base : 20px`
 })
@@ -263,7 +296,11 @@ Object.keys(sizes).forEach(item => {
 
 ### Color palette
 
-There are two possible ways to access color information: the color palette and the brand colors. The color palette is intended to contain all the colors (and their shades) that your app will use, and the brand palette is the specific colors that your brand uses. Two methods can be used to retrieve the values, these are:
+There are two possible ways to access color information: the color palette and the brand colors.
+
+The color palette is intended to contain all the colors (and their shades) that your app will use, and the brand palette _should_ contain the specific colors that your brand uses.
+
+Two methods can be used to retrieve the values, these are: `tokens.color()` and `tokens.brand()`, below is what the data looks like for them:
 
 ```js
 colors: {
@@ -294,73 +331,89 @@ colors: {
 },
 ```
 
-### `ds.color()` - Get color palette values
+#### `tokens.color()` - Get color palette values
 
-The `ds.color()` function gets values from the `colorPalette` object. It assumes every color has a `base` property and other properties for different shades of the same color.
-This is a short-hand for the `ds.get()` function.
+The `tokens.color()` function gets values from the `colorPalette` object. It assumes every color has a `base` property and other properties for different shades of the same color.
+This is a short-hand for the `tokens.get()` function.
 
 ```js
 // Get values like this:
-ds.color('bright') // #F9FAFB - the `base` key is the default, so it is not needed
-ds.color('bright', 'dark')
+tokens.color('bright') // #F9FAFB - the `base` key is the default, so it is not needed
+tokens.color('bright', 'dark')
 ```
 
-### `ds.brand()` - Get brand palette values
+#### `tokens.brand()` - Get brand palette values
 
-The `ds.brand()` function gets values from the `colors.brand` object.
-This is a short-hand for the `ds.get()` function.
+The `tokens.brand()` function gets values from the `colors.brand` object.
+This is a short-hand for the `tokens.get()` function.
 
 ```js
 // Get brand values like this:
-ds.brand('orange')
-ds.brand('pink')
-ds.brand('primary.blue') // it is possible to nest this object as much as you like
+tokens.brand('orange')
+tokens.brand('pink')
+tokens.brand('primary.blue') // it is possible to nest this object as much as you like
 ```
 
-### `ds.bp()` - Get responsive breakpoint values
+### `tokens.bp()` - Get responsive breakpoint values
 
-The `ds.bp()` method is a short-hand for the `ds.get()` method. It can be used to get a breakpoint from the `breakpoints` object.
+The `tokens.bp()` method is a short-hand for the `tokens.get()` method. It can be used to get a breakpoint from the `breakpoints` object.
 
 ```js
-ds.bp('m')
+tokens.bp('m')
 ```
 
-### `ds.z()` - Get `z-index` values
+### `tokens.z()` - Get `z-index` values
 
-The `ds.z()` method is a short-hand for the `ds.get()` method. It can be used to get a breakpoint from the `zIndex` object.
+The `tokens.z()` method is a short-hand for the `tokens.get()` method. It can be used to get a breakpoint from the `zIndex` object.
 
 ```js
-ds.z('low')
+tokens.z('low')
 ```
 
-### `ds.spacing()` / `ds.space()` - Get spacing values
+### `tokens.spacing()` or `tokens.space()` - Get spacing values
 
-The `ds.spacing()` method returns a value from your `spacing.scale` array. It takes an index for that array and converts the value to pixels.
+The `tokens.spacing()` method returns a value from your `spacing.scale` definition. **The spacing data could either be an array, or an object.**
+
+- If an array, it takes an `index` (number) for that array e.g. `tokens.space(2)`
+- If an object, it takes a `key` (string) for the item in that object e.g. `tokens.space('m')`
+
+#### Array example:
 
 ```js
-// Example scale array
-// scale: [0, 8, 16, 24, 32, 40]
+scale: [0, 8, 16, 24, 32, 40]
 
-ds.spacing(2) // '16px'
+tokens.spacing(2) // '16px'
+// Note: `tokens.space(2)` can also be used
 ```
 
-Note: `ds.space(2)` can also be used.
+#### Object example:
+
+```js
+scale: {
+  s: '10rem',
+  m: '100rem',
+  l: '1000rem',
+}
+
+tokens.spacing('m') // '100rem'
+// Note: `tokens.space('m')` can also be used
+```
 
 ### Calculations
 
 The framework currently provides a few calculation functions, `multiply`, `toPx` and `pxTo`:
 
-#### `ds.multiply()`
+#### `tokens.multiply()`
 
 ```js
-ds.multiply(10, 2) // 20
+tokens.multiply(10, 2) // 20
 
 // you can pass in another value from the system
-ds.multiply(ds.get('spacing.baseline'), 2)
+tokens.multiply(tokens.get('spacing.baseline'), 2)
 
 // or just use the key from the system
 // the initial value will always be run through `parseFloat()`
-ds.multiply('spacing.baseline', 2)
+tokens.multiply('spacing.baseline', 2)
 ```
 
 #### `pxTo()`

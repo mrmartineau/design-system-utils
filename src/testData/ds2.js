@@ -34,7 +34,11 @@ const DesignSystem2 = {
   },
 
   spacing: {
-    scale: [0, 8, 16, 24, 32, 40],
+    scale: {
+      s: '10rem',
+      m: '100rem',
+      l: '1000rem',
+    },
   },
 }
 
