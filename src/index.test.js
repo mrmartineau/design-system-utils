@@ -15,7 +15,7 @@ test('z-index', () => {
 })
 
 test('spacing', () => {
-  expect(ds1.spacing(0)).toBe('0')
+  expect(ds1.spacing(0)).toBe('0px')
   expect(ds1.spacing(3)).toBe('24px')
   expect(ds1.space(2)).toBe('16px')
 

@@ -60,7 +60,7 @@ const DesignSystem1 = {
   },
 
   spacing: {
-    scale: ['0', '8px', '16px', '24px', '32px', '40px'],
+    scale: [0, 8, 16, 24, 32, 40],
     baseline: 20,
   },
 }

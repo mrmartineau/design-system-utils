@@ -374,7 +374,7 @@ tokens.z('low')
 
 The `tokens.spacing()` method returns a value from your `spacing.scale` definition. **The spacing data could either be an array, or an object.**
 
-- If an array, it takes an `index` (number) for that array e.g. `tokens.space(2)`
+- If an array, it takes an `index` (number) for that array e.g. `tokens.space(2)`. This variant adds `px` to the end of the string, this will be deprecated in v2.0.0.
 - If an object, it takes a `key` (string) for the item in that object e.g. `tokens.space('m')`
 
 #### Array example:

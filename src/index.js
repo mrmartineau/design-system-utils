@@ -62,7 +62,7 @@ export default class DesignSystem {
       return this.get(val, this.ds.spacing.scale)
     }
 
-    return this.ds.spacing.scale[val]
+    return `${this.ds.spacing.scale[val]}px`
   }
 
   space(val) {
