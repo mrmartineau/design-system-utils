@@ -44,15 +44,6 @@ const MissingParent = (msg: string): string =>
 const MissingKey = (location: string, val: string | number): string =>
   `There is a missing value at this key: ${location}.${val}`
 
-// const ourThrow () => {
-//   if (
-//     this.get('colors', this.ds) === undefined &&
-//     this.get(location, this.ds) === undefined
-//   ) {
-//     throw new Error(MissingParent(location))
-//   }
-// }
-
 export default class DesignSystem<T extends System, K extends SystemOptions> {
   private opts: K
   private ds: T

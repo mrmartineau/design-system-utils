@@ -1,6 +1,6 @@
 node_modules
 cjs
 coverage
-dist
+es
 .rpt2_cache
 .idea
