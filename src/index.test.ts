@@ -36,6 +36,7 @@ test('z-index', () => {
 })
 
 test('spacing', () => {
+  // when using an array
   expect(ds1.spacing(0)).toBe('0px')
   expect(ds1.space(2)).toBe('16px')
   expect(ds1.spacing(3)).toBe('24px')
@@ -257,34 +258,3 @@ test('ds.color', () => {
     'Values missing at: colors.colorPalette within your design tokens config'
   )
 })
-
-// test('errors', () => {
-//   const ds = new DesignSystem({})
-
-// expect(() => {
-//   throw new Error('foobar')
-// }).toThrow('foobar')
-
-// expect(() => ds.spacing('m')).toThrow()
-
-// expect(() => ds.color('primary')).toThrow(
-//   'Please create values at: colors.colorPalette within the design system object'
-// )
-
-// expect(ds.color('primary', 'foo')).toThrow(
-//   'Please create values at: colors.colorPalette within the design system object'
-// )
-
-// expect(ds.fs('s')).toThrow(
-//   'Please create values at: type.sizes within the design system object'
-// )
-// expect(ds.bp('m')).toThrow(
-//   'Please create values at: breakpoints within the design system object'
-// )
-// expect(ds.spacing(3)).toThrow(
-//   'Please create values at: breakpoints within the design system object'
-// )
-// expect(ds.z('m')).toThrow(
-//   'Please create values at: breakpoints within the design system object'
-// )
-// })
