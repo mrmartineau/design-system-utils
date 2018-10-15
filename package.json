@@ -6,7 +6,7 @@
   "browser": "cjs/index.js",
   "module": "es/index.js",
   "source": "./src/index.ts",
-  "types": "cjs/types.d.ts",
+  "types": "cjs/index.d.ts",
   "repository": "https://github.com/mrmartineau/design-system-utils",
   "directories": {
     "example": "example"
