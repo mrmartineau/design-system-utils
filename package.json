@@ -2,10 +2,12 @@
   "name": "design-system-utils",
   "version": "1.1.1",
   "description": "Design-system utils for working with JS-in-CSS",
-  "main": "./cjs/index.js",
-  "module": "./src/index.js",
-  "browser": "./cjs/index.js",
-  "types": "./src/index.d.ts",
+  "main": "dist/dsu.js",
+  "browser": "dist/dsu.js",
+  "umd:main": "dist/dsu.umd.js",
+  "module": "dist/dsu.mjs",
+  "source": "./src/index.ts",
+  "types": "dist/dsu.d.ts",
   "repository": "https://github.com/mrmartineau/design-system-utils",
   "directories": {
     "example": "example"
@@ -19,13 +21,14 @@
   "scripts": {
     "presize": "npm run build",
     "size": "size-limit",
-    "test": "jest --verbose",
+    "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "build": "babel src -d cjs --ignore spec.js,test.js,testData",
+    "build": "microbundle",
+    "dev": "microbundle watch",
     "prepublishOnly": "npm run build",
-    "prelint:js": "npm run format:all",
-    "lint:js": "eslint ./src/**/*.js",
+    "prelint": "npm run format:all",
+    "lint": "tslint ./src/**/*.ts",
     "format:all": "prettier --write '{src,example}/**/*'"
   },
   "keywords": [
@@ -39,15 +42,16 @@
   "author": "Zander Martineau",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.3",
-    "babel-preset-env": "^1.7.0",
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
+    "@types/jest": "^23.3.5",
     "jest": "^23.0.1",
-    "prettier": "^1.13.2",
-    "size-limit": "^0.18.1"
+    "microbundle": "^0.6.0",
+    "prettier": "^1.14.3",
+    "size-limit": "^0.18.1",
+    "ts-jest": "^23.10.4",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-plugin-prettier": "^2.0.0",
+    "typescript": "2.9.1"
   },
   "dependencies": {
     "object-get": "^2.1.0"
