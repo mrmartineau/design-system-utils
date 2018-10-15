@@ -1,11 +1,12 @@
 // options: modular-scale:false, fontSizeUnit:px
-import DesignSystem, { System, SystemOptions, SystemScale } from '../index'
+import DesignSystem, { System, SystemOptions, SystemSpacing } from '../index'
+
+interface MySystemSpacing extends SystemSpacing {
+  baseline: number
+}
 
 interface MySystem extends System {
-  spacing: {
-    scale: SystemScale
-    baseline: number
-  }
+  spacing: MySystemSpacing
 }
 
 const DesignSystem1: MySystem = {
