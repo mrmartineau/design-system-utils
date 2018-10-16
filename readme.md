@@ -3,7 +3,7 @@
   Design System Utils
 
 [![npm](https://img.shields.io/npm/v/design-system-utils.svg?style=flat-square)](https://www.npmjs.com/package/design-system-utils)
-[![Travis CI Build](https://img.shields.io/travis/mrmartineau/design-system-utils.svg?style=flat-square)](https://travis-ci.org/mrmartineau/design-system-utils)
+[![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/design-system-utils.svg?style=flat-square)](https://www.npmjs.com/package/design-system-utils) [![Travis CI Build](https://img.shields.io/travis/mrmartineau/design-system-utils.svg?style=flat-square)](https://travis-ci.org/mrmartineau/design-system-utils)
 ![](https://img.shields.io/badge/licence-MIT-blue.svg?style=flat-square)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
@@ -30,6 +30,7 @@ Design System Utils is a micro framework that standardises your design-system to
   - [`tokens.z()` - Get `z-index` values](#tokensz---get-z-index-values)
   - [`tokens.spacing()` or `tokens.space()` - Get spacing values](#tokensspacing-or-tokensspace---get-spacing-values)
   - [Calculations](#calculations)
+- [Usage with Typescript](#usage-with-typescript)
 - [Demo & examples](#demo--examples)
 
 </details>
@@ -46,7 +47,19 @@ npm install --save design-system-utils
 
 ### Size
 
-Package size: **910 B minified and gzipped** 👍
+```
+$ size-limit
+
+  cjs/index.js
+  Package size: 814 B
+  Size limit:   1 KB
+
+  es/index.js
+  Package size: 806 B
+  Size limit:   1 KB
+
+  With all dependencies, minified and gzipped
+```
 
 ## Usage
 
@@ -446,6 +459,34 @@ Parses a number and unit string, and returns the unit used
 import { parseUnit } from 'design-system-utils'
 parseUnit('1.875rem') // 'rem'
 parseUnit('18px') // 'px'
+```
+
+## Usage with Typescript
+
+Typescript types and interfaces should be imported as named imports. Below is an example where a new item (`baseline`) is added to the `spacing` object.
+
+```ts
+import DesignSystem, { System, SystemOptions, SystemSpacing } from '../index'
+
+interface MySystemSpacing extends SystemSpacing {
+  baseline: number
+}
+
+interface MySystem extends System {
+  spacing: MySystemSpacing
+}
+
+const Tokens: MySystem = {
+  ...
+  ...
+
+  spacing: {
+    scale: [0, 8, 16, 24, 32, 40],
+    baseline: 20,
+  },
+}
+
+export default new DesignSystem<MySystem, SystemOptions>(Tokens)
 ```
 
 ## Demo & examples
