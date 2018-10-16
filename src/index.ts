@@ -81,102 +81,77 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
 
   /*~ get a value from the design system object */
   public get(value: string, obj: any = this.ds): any {
-    // TODO: move all error checking here so we can remove it from all other methods
-    // try {
-    //   if (objectGet(obj, value) === undefined) {
-    //     throw new Error(MissingParent(value))
-    //   }
-    //   return objectGet(obj, value)
-    // } catch (error) {
-    //   throw new Error(error)
-    // }
-
     return objectGet(obj, value)
   }
 
   /*~ get a breakpoint value from the design system object */
   public bp(breakpoint: string): string {
-    try {
-      const location = 'breakpoints'
-      if (this.get(location, this.ds) === undefined) {
-        throw new Error(MissingParent(location))
-      }
-
-      const value: string | undefined = this.get(
-        breakpoint,
-        this.ds.breakpoints
-      )
-
-      if (value === undefined) {
-        throw new Error(MissingKey(location, breakpoint))
-      }
-
-      return value
-    } catch (error) {
-      throw new Error(error)
+    const location = 'breakpoints'
+    if (this.get(location, this.ds) === undefined) {
+      throw new Error(MissingParent(location))
     }
+
+    const value: string | undefined = this.get(breakpoint, this.ds.breakpoints)
+
+    if (value === undefined) {
+      throw new Error(MissingKey(location, breakpoint))
+    }
+
+    return value
   }
 
   /*~ get a z-index value from the design system object */
   public z(z: string): string {
-    try {
-      const location = 'zIndex'
-      if (this.get(location, this.ds) === undefined) {
-        throw new Error(MissingParent(location))
-      }
-
-      const value: string | undefined = this.get(z, this.ds.zIndex)
-
-      if (value === undefined) {
-        throw new Error(MissingKey(location, z))
-      }
-
-      return value
-    } catch (error) {
-      throw new Error(error)
+    const location = 'zIndex'
+    if (this.get(location, this.ds) === undefined) {
+      throw new Error(MissingParent(location))
     }
+
+    const value: string | undefined = this.get(z, this.ds.zIndex)
+
+    if (value === undefined) {
+      throw new Error(MissingKey(location, z))
+    }
+
+    return value
   }
 
   /*~ get a font-size value from the design system object */
   public fontSize(size: string): string {
-    try {
-      const location = 'type.sizes'
-      if (
-        this.get('type', this.ds) === undefined &&
-        this.get(location, this.ds) === undefined
-      ) {
-        throw new Error(MissingParent(location))
-      }
+    const location = 'type.sizes'
+    if (
+      this.get('type', this.ds) === undefined &&
+      this.get(location, this.ds) === undefined
+    ) {
+      throw new Error(MissingParent(location))
+    }
 
-      let baseFontSize
-      if (typeof this.ds.type.baseFontSize === 'string') {
-        baseFontSize = parseFloat(this.ds.type.baseFontSize)
-      }
+    let baseFontSize
+    if (typeof this.ds.type.baseFontSize === 'string') {
+      baseFontSize = parseFloat(this.ds.type.baseFontSize)
+    }
 
-      const value: string | undefined = this.get(size, this.ds.type.sizes)
+    const value: string | undefined = this.get(size, this.ds.type.sizes)
 
-      if (value === undefined) {
-        throw new Error(MissingKey(location, size))
-      }
+    if (value === undefined) {
+      throw new Error(MissingKey(location, size))
+    }
 
-      // Don't convert the value if we don't have to
-      if (parseUnit(value) === this.opts.fontSizeUnit) {
+    // Don't convert the value if we don't have to
+    if (parseUnit(value) === this.opts.fontSizeUnit) {
+      return value
+    }
+
+    // Convert font-size to the specified unit
+    switch (this.opts.fontSizeUnit) {
+      case 'rem':
+        return pxTo(value, baseFontSize, 'rem')
+      case 'em':
+        return pxTo(value, baseFontSize, 'em')
+      case 'px':
+        return toPx(value, baseFontSize)
+      default:
         return value
-      }
-
-      // Convert font-size to the specified unit
-      switch (this.opts.fontSizeUnit) {
-        case 'rem':
-          return pxTo(value, baseFontSize, 'rem')
-        case 'em':
-          return pxTo(value, baseFontSize, 'em')
-        case 'px':
-          return toPx(value, baseFontSize)
-        default:
-          return value
-      }
-    } catch (error) {
-      throw new Error(error)
     }
   }
 
@@ -187,32 +162,28 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
 
   /*~ get a spacing value from the design system object */
   public spacing(val: string | number): string {
-    try {
-      const location = 'spacing.scale'
-      if (
-        this.get('spacing', this.ds) === undefined &&
-        this.get(location, this.ds) === undefined
-      ) {
-        throw new Error(MissingParent(location))
-      }
-
-      const value: number | string | undefined = this.get(
-        `${location}[${val}]`,
-        this.ds
-      )
-
-      if (value === undefined) {
-        throw new Error(MissingKey(location, val))
-      }
-
-      if (typeof value === 'string') {
-        return value
-      }
-
-      return `${value}px`
-    } catch (error) {
-      throw new Error(error)
+    const location = 'spacing.scale'
+    if (
+      this.get('spacing', this.ds) === undefined &&
+      this.get(location, this.ds) === undefined
+    ) {
+      throw new Error(MissingParent(location))
     }
+
+    const value: number | string | undefined = this.get(
+      `${location}[${val}]`,
+      this.ds
+    )
+
+    if (value === undefined) {
+      throw new Error(MissingKey(location, val))
+    }
+
+    if (typeof value === 'string') {
+      return value
+    }
+
+    return `${value}px`
   }
 
   /*~ get a spacing value from the design system object */
@@ -222,47 +193,37 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
 
   /*~ get a color from your color palette */
   public color(hue: string, variant: string = 'base'): string {
-    try {
-      const location = 'colors.colorPalette'
-      if (
-        this.get('colors', this.ds) === undefined &&
-        this.get(location, this.ds) === undefined
-      ) {
-        throw new Error(MissingParent(location))
-      }
-      const value: string | undefined = this.ds.colors.colorPalette[hue][
-        variant
-      ]
-      if (value === undefined) {
-        throw new Error(MissingKey(location, hue, variant))
-      }
-
-      return value
-    } catch (error) {
-      throw new Error(error)
+    const location = 'colors.colorPalette'
+    if (
+      this.get('colors', this.ds) === undefined &&
+      this.get(location, this.ds) === undefined
+    ) {
+      throw new Error(MissingParent(location))
     }
+    const value: string | undefined = this.ds.colors.colorPalette[hue][variant]
+    if (value === undefined) {
+      throw new Error(MissingKey(location, hue, variant))
+    }
+
+    return value
   }
 
   /*~ get a color from your brand color palette */
   public brand(color: string): string {
-    try {
-      const location = 'colors.brand'
-      if (
-        this.get('colors', this.ds) === undefined &&
-        this.get(location, this.ds) === undefined
-      ) {
-        throw new Error(MissingParent(location))
-      }
-
-      const value: string | undefined = this.get(color, this.ds.colors.brand)
-
-      if (value === undefined) {
-        throw new Error(MissingKey(location, color))
-      }
-
-      return value
-    } catch (error) {
-      throw new Error(error)
+    const location = 'colors.brand'
+    if (
+      this.get('colors', this.ds) === undefined &&
+      this.get(location, this.ds) === undefined
+    ) {
+      throw new Error(MissingParent(location))
     }
+
+    const value: string | undefined = this.get(color, this.ds.colors.brand)
+
+    if (value === undefined) {
+      throw new Error(MissingKey(location, color))
+    }
+
+    return value
   }
 }
