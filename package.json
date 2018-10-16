@@ -34,6 +34,13 @@
     "lint": "tslint ./src/**/*.ts",
     "format:all": "prettier --write '{src,example}/**/*'"
   },
+  "files": [
+    "cjs",
+    "es",
+    "src",
+    "readme.md",
+    "LICENSE"
+  ],
   "keywords": [
     "css-in-js",
     "glamorous",
@@ -44,6 +51,9 @@
   ],
   "author": "Zander Martineau",
   "license": "MIT",
+  "dependencies": {
+    "object-get": "^2.1.0"
+  },
   "devDependencies": {
     "@types/jest": "^23.3.5",
     "jest": "^23.6.0",
@@ -65,8 +75,5 @@
     "tslint-config-prettier": "^1.15.0",
     "tslint-plugin-prettier": "^2.0.0",
     "typescript": "3.1.3"
-  },
-  "dependencies": {
-    "object-get": "^2.1.0"
   }
 }
