@@ -1,7 +1,15 @@
 // options: modular-scale:false, fontSizeUnit:px
-import DesignSystem from '../index'
+import DesignSystem, { System, SystemOptions, SystemSpacing } from '../index'
 
-const DesignSystem1 = {
+interface MySystemSpacing extends SystemSpacing {
+  baseline: number
+}
+
+interface MySystem extends System {
+  spacing: MySystemSpacing
+}
+
+const DesignSystem1: MySystem = {
   type: {
     baseFontSize: '30px',
 
@@ -49,7 +57,7 @@ const DesignSystem1 = {
 
   breakpoints: {
     s: 200,
-    m: 500,
+    m: '500px',
     l: 800,
   },
 
@@ -65,4 +73,4 @@ const DesignSystem1 = {
   },
 }
 
-export default new DesignSystem(DesignSystem1)
+export default new DesignSystem<MySystem, SystemOptions>(DesignSystem1)

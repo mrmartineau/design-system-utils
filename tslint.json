@@ -1,0 +1,15 @@
+{
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "extends": ["tslint:latest", "tslint-config-prettier"],
+  "rules": {
+    "no-console": [true, "log", "error"],
+    "ordered-imports": [false],
+    "interface-name": [false],
+    "no-implicit-dependencies": [true, "dev"],
+    "no-submodule-imports": [false],
+    "no-duplicate-imports": [false],
+    "no-unused-expression": [false],
+    "prefer-object-spread": [false],
+    "object-literal-sort-keys": [false]
+  }
+}

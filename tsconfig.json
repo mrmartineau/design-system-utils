@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "ES2015",
+    "target": "es6",
+    "noImplicitThis": true,
+    "strictNullChecks": false,
+    "strictFunctionTypes": true,
+    "esModuleInterop": true,
+    "declaration": true
+  },
+  "include": ["src/index.ts", "src/types.ts", "types/**/*"]
+}

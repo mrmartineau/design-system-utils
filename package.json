@@ -2,10 +2,11 @@
   "name": "design-system-utils",
   "version": "1.1.1",
   "description": "Design-system utils for working with JS-in-CSS",
-  "main": "./cjs/index.js",
-  "module": "./src/index.js",
-  "browser": "./cjs/index.js",
-  "types": "./src/index.d.ts",
+  "main": "cjs/index.js",
+  "browser": "cjs/index.js",
+  "module": "es/index.js",
+  "source": "./src/index.ts",
+  "types": "cjs/index.d.ts",
   "repository": "https://github.com/mrmartineau/design-system-utils",
   "directories": {
     "example": "example"
@@ -14,20 +15,32 @@
     {
       "path": "cjs/index.js",
       "limit": "1 KB"
+    },
+    {
+      "path": "es/index.js",
+      "limit": "1 KB"
     }
   ],
   "scripts": {
     "presize": "npm run build",
     "size": "size-limit",
-    "test": "jest --verbose",
+    "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "build": "babel src -d cjs --ignore spec.js,test.js,testData",
+    "build": "NODE_ENV=production rollup -c",
+    "watch": "rollup -c -w",
     "prepublishOnly": "npm run build",
-    "prelint:js": "npm run format:all",
-    "lint:js": "eslint ./src/**/*.js",
+    "prelint": "npm run format:all",
+    "lint": "tslint ./src/**/*.ts",
     "format:all": "prettier --write '{src,example}/**/*'"
   },
+  "files": [
+    "cjs",
+    "es",
+    "src",
+    "readme.md",
+    "LICENSE"
+  ],
   "keywords": [
     "css-in-js",
     "glamorous",
@@ -38,18 +51,29 @@
   ],
   "author": "Zander Martineau",
   "license": "MIT",
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.3",
-    "babel-preset-env": "^1.7.0",
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "jest": "^23.0.1",
-    "prettier": "^1.13.2",
-    "size-limit": "^0.18.1"
-  },
   "dependencies": {
     "object-get": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.5",
+    "jest": "^23.6.0",
+    "microbundle": "^0.6.0",
+    "prettier": "^1.14.3",
+    "rollup": "^0.66.6",
+    "rollup-plugin-auto-external": "^2.0.0",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-buble": "^0.19.4",
+    "rollup-plugin-bundle-size": "^1.0.2",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-terser": "^3.0.0",
+    "rollup-plugin-typescript2": "^0.17.1",
+    "rollup-plugin-uglify": "^6.0.0",
+    "size-limit": "^0.20.1",
+    "ts-jest": "^23.10.4",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-plugin-prettier": "^2.0.0",
+    "typescript": "3.1.3"
   }
 }

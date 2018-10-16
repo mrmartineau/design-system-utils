@@ -1,7 +1,7 @@
 // options: fontSizeUnit:px
-import DesignSystem from '../index'
+import DesignSystem, { System, SystemOptions } from '../index'
 
-const DesignSystem2 = {
+const DesignSystem2: System = {
   type: {
     baseFontSize: '30px',
 
@@ -42,4 +42,4 @@ const DesignSystem2 = {
   },
 }
 
-export default new DesignSystem(DesignSystem2)
+export default new DesignSystem<System, SystemOptions>(DesignSystem2)
