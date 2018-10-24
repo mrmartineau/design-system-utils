@@ -4,6 +4,7 @@
 
 [![npm](https://img.shields.io/npm/v/design-system-utils.svg?style=flat-square)](https://www.npmjs.com/package/design-system-utils)
 [![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/design-system-utils.svg?style=flat-square)](https://www.npmjs.com/package/design-system-utils) [![Travis CI Build](https://img.shields.io/travis/mrmartineau/design-system-utils.svg?style=flat-square)](https://travis-ci.org/mrmartineau/design-system-utils)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmrmartineau%2Fdesign-system-utils.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmrmartineau%2Fdesign-system-utils?ref=badge_shield)
 ![](https://img.shields.io/badge/licence-MIT-blue.svg?style=flat-square)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
@@ -496,3 +497,6 @@ I created a demo on [codesandbox.io](https://codesandbox.io/s/6wrp94x7kk), it in
 ## Licence
 
 MIT &copy; [Zander Martineau](https://zander.wtf)
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmrmartineau%2Fdesign-system-utils.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmrmartineau%2Fdesign-system-utils?ref=badge_large)
