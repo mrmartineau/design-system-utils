@@ -17,7 +17,7 @@ Design System Utils is a micro framework that standardises your design-system to
 - [Install](#install)
 - [Usage](#usage)
   - [Setting up your design system](#setting-up-your-design-system)
-  - [Initialise the design system framework](#initialise-the-design-system-framework)
+  - [Initialize the design system framework](#initialize-the-design-system-framework)
   - [Accessing the design system data in your app](#accessing-the-design-system-data-in-your-app)
 - [Options](#options)
 - [API methods](#api-methods)
@@ -182,7 +182,7 @@ const designTokens = {
 }
 ```
 
-### Initialise the design system framework
+### Initialize the design system framework
 
 ```js
 // myDesignSystem.js
