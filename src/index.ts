@@ -1,4 +1,4 @@
-import objectGet from 'object-get'
+import { get } from '@ngard/tiny-get'
 import {
   System,
   SystemOptions,
@@ -81,7 +81,7 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
 
   /*~ get a value from the design system object */
   public get(value: string, obj: any = this.ds): any {
-    return objectGet(obj, value)
+    return get(obj, value, undefined)
   }
 
   /*~ get a breakpoint value from the design system object */
@@ -119,12 +119,7 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
   /*~ get a font-size value from the design system object */
   public fontSize(size: string): string {
     const location = 'type.sizes'
-    if (
-      this.get('type', this.ds) === undefined &&
-      this.get(location, this.ds) === undefined
-    ) {
-      throw new Error(MissingParent(location))
-    }
+    this.parentCheck(location)
 
     let baseFontSize
     if (typeof this.ds.type.baseFontSize === 'string') {
@@ -155,7 +150,7 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
     }
   }
 
-  /*~ get a spacing value from the design system object */
+  /*~ get a font-size value from the design system object */
   public fs(size: string): string {
     return this.fontSize(size)
   }
@@ -163,16 +158,11 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
   /*~ get a spacing value from the design system object */
   public spacing(val: string | number): string {
     const location = 'spacing.scale'
-    if (
-      this.get('spacing', this.ds) === undefined &&
-      this.get(location, this.ds) === undefined
-    ) {
-      throw new Error(MissingParent(location))
-    }
+    this.parentCheck(location)
 
     const value: number | string | undefined = this.get(
-      `${location}[${val}]`,
-      this.ds
+      `${val}`,
+      this.ds.spacing.scale
     )
 
     if (value === undefined) {
@@ -200,7 +190,9 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
     ) {
       throw new Error(MissingParent(location))
     }
+
     const value: string | undefined = this.ds.colors.colorPalette[hue][variant]
+
     if (value === undefined) {
       throw new Error(MissingKey(location, hue, variant))
     }
@@ -211,12 +203,7 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
   /*~ get a color from your brand color palette */
   public brand(color: string): string {
     const location = 'colors.brand'
-    if (
-      this.get('colors', this.ds) === undefined &&
-      this.get(location, this.ds) === undefined
-    ) {
-      throw new Error(MissingParent(location))
-    }
+    this.parentCheck(location)
 
     const value: string | undefined = this.get(color, this.ds.colors.brand)
 
@@ -225,5 +212,15 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
     }
 
     return value
+  }
+
+  private parentCheck(loc: string) {
+    const locPt1 = loc.split('.')
+    if (
+      this.get(locPt1[0], this.ds) === undefined &&
+      this.get(loc, this.ds) === undefined
+    ) {
+      throw new Error(MissingParent(loc))
+    }
   }
 }
