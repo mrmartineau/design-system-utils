@@ -8,7 +8,8 @@
     "strictNullChecks": false,
     "strictFunctionTypes": true,
     "esModuleInterop": true,
-    "declaration": true
+    "declaration": true,
+    "resolveJsonModule": true
   },
   "include": ["src/index.ts", "src/types.ts", "types/**/*"]
 }

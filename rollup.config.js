@@ -5,44 +5,38 @@ import typescript from 'rollup-plugin-typescript2'
 import { terser } from 'rollup-plugin-terser'
 import bundleSize from 'rollup-plugin-bundle-size'
 import buble from 'rollup-plugin-buble'
-
 import pkg from './package.json'
 
-export default [
-  {
-    input: 'src/index.ts',
-    output: {
+export default {
+  input: 'src/index.ts',
+  output: [
+    {
       file: pkg.main,
       format: 'cjs',
       exports: 'named',
       sourcemap: true,
     },
-    plugins: [
-      typescript(),
-      resolve(),
-      autoExternal(),
-      commonjs(),
-      terser(),
-      buble(),
-      bundleSize(),
-    ],
-  },
-  {
-    input: 'src/index.ts',
-    output: {
+    {
       file: pkg.module,
       format: 'es',
       exports: 'named',
       sourcemap: true,
     },
-    plugins: [
-      typescript(),
-      resolve(),
-      autoExternal(),
-      commonjs(),
-      terser(),
-      buble(),
-      bundleSize(),
-    ],
-  },
-]
+    {
+      file: pkg.browser,
+      format: 'umd',
+      exports: 'named',
+      sourcemap: true,
+      name: 'design-system-utils',
+    },
+  ],
+  plugins: [
+    typescript(),
+    resolve(),
+    autoExternal(),
+    commonjs(),
+    buble(),
+    terser(),
+    bundleSize(),
+  ],
+}

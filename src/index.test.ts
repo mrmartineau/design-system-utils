@@ -48,35 +48,39 @@ describe('design-system-utils methods', () => {
     )
   })
 
-  test('spacing', () => {
-    // when using an array
-    expect(ds1.spacing(0)).toBe('0px')
-    expect(ds1.space(2)).toBe('16px')
-    expect(ds1.spacing(3)).toBe('24px')
+  describe('spacing', () => {
+    test('when using an array', () => {
+      expect(ds1.spacing(0)).toBe('0px')
+      expect(ds1.space(2)).toBe('16px')
+      expect(ds1.spacing(3)).toBe('24px')
+    })
 
-    // when using an object
-    expect(ds2.space('s')).toBe('10rem')
-    expect(ds2.space('m')).toBe('100rem')
-    expect(ds2.space('l')).toBe('1000rem')
+    test('when using an object', () => {
+      expect(ds2.space('s')).toBe('10rem')
+      expect(ds2.space('m')).toBe('100rem')
+      expect(ds2.space('l')).toBe('1000rem')
+    })
 
     // Errors
-    expect(() => ds1.spacing('xxxxl')).toThrow(
-      'design-system-utils: There is a missing value at this key: spacing.scale.xxxxl'
-    )
-    expect(() => ds1.spacing(10)).toThrow(
-      'design-system-utils: There is a missing value at this key: spacing.scale.10'
-    )
+    test('should return errors', () => {
+      expect(() => ds1.spacing('xxxxl')).toThrow(
+        'design-system-utils: There is a missing value at this key: spacing.scale.xxxxl'
+      )
+      expect(() => ds1.spacing(10)).toThrow(
+        'design-system-utils: There is a missing value at this key: spacing.scale.10'
+      )
 
-    const ds = new DesignSystem({})
-    expect(() => ds.spacing('m')).toThrow(
-      'design-system-utils: Values missing at: spacing.scale within your design tokens config'
-    )
-    expect(() => ds.space('m')).toThrow(
-      'design-system-utils: Values missing at: spacing.scale within your design tokens config'
-    )
-    expect(() => ds.space(2)).toThrow(
-      'design-system-utils: Values missing at: spacing.scale within your design tokens config'
-    )
+      const ds = new DesignSystem({})
+      expect(() => ds.spacing('m')).toThrow(
+        'design-system-utils: Values missing at: spacing.scale within your design tokens config'
+      )
+      expect(() => ds.space('m')).toThrow(
+        'design-system-utils: Values missing at: spacing.scale within your design tokens config'
+      )
+      expect(() => ds.space(2)).toThrow(
+        'design-system-utils: Values missing at: spacing.scale within your design tokens config'
+      )
+    })
   })
 
   describe('fontSize', () => {

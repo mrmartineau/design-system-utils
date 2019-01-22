@@ -1,6 +1,5 @@
 node_modules
-cjs
+build
 coverage
-es
 .rpt2_cache
 .idea
