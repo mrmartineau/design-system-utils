@@ -1,6 +1,6 @@
 {
   "name": "design-system-utils",
-  "version": "1.2.0",
+  "version": "1.3.0-0",
   "description": "Design-system utils for working with JS-in-CSS",
   "main": "build/cjs.js",
   "browser": "build/umd.js",
