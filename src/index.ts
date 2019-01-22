@@ -27,18 +27,18 @@ export {
   SystemOptionalKey,
 }
 
-/*~ converts a `rem` or `em` value to `px` */
+/** pxTo(): converts a `rem` or `em` value to `px` */
 export const pxTo = (
   value: any,
   base: number = 16,
   unit: string = 'rem'
 ): string => `${parseFloat(value) / base}${unit}`
 
-/*~ converts `px` to `rem` or `em` */
+/** toPx(): converts `px` to `rem` or `em` */
 export const toPx = (value: any, base: number = 16): string =>
   `${parseFloat(value) * base}px`
 
-/*~ parses a number and unit string, and returns the unit used */
+/** parseUnit(): parses a number and unit string, and returns the unit used */
 export const parseUnit = (str: string): string =>
   str.trim().match(/[\d.\-+]*\s*(.*)/)[1] || ''
 
@@ -71,7 +71,10 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
     this.ds = system
   }
 
-  /*~ multiply a given value */
+  /**
+   * multiply()
+   * multiply a given value
+   */
   public multiply(initial: any, multiplier: number): number {
     const initialVal =
       typeof initial === 'string' ? parseFloat(this.get(initial)) : initial
@@ -79,12 +82,18 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
     return initialVal * multiplier
   }
 
-  /*~ get a value from the design system object */
+  /**
+   * get()
+   * get any value from the design system object
+   */
   public get(value: string, obj: any = this.ds): any {
     return get(obj, value, undefined)
   }
 
-  /*~ get a breakpoint value from the design system object */
+  /**
+   * bp()
+   * get a breakpoint value from the design system object
+   */
   public bp(breakpoint: string): string {
     const location = 'breakpoints'
     if (this.get(location, this.ds) === undefined) {
@@ -100,7 +109,10 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
     return value
   }
 
-  /*~ get a z-index value from the design system object */
+  /**
+   * z()
+   * get a z-index value from the design system object
+   */
   public z(z: string): string {
     const location = 'zIndex'
     if (this.get(location, this.ds) === undefined) {
@@ -116,7 +128,10 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
     return value
   }
 
-  /*~ get a font-size value from the design system object */
+  /**
+   * fontSize()
+   * get a font-size value from the design system object
+   */
   public fontSize(size: string): string {
     const location = 'type.sizes'
     this.parentCheck(location)
@@ -150,12 +165,19 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
     }
   }
 
-  /*~ get a font-size value from the design system object */
+  /**
+   * fs()
+   * get a font-size value from the design system object
+   * same as fontSize()
+   */
   public fs(size: string): string {
     return this.fontSize(size)
   }
 
-  /*~ get a spacing value from the design system object */
+  /**
+   * spacing()
+   * get a spacing value from the design system object
+   */
   public spacing(val: string | number): string {
     const location = 'spacing.scale'
     this.parentCheck(location)
@@ -176,12 +198,19 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
     return `${value}px`
   }
 
-  /*~ get a spacing value from the design system object */
+  /**
+   * space()
+   * get a spacing value from the design system object
+   * same as spacing()
+   */
   public space(val: string | number): string {
     return this.spacing(val)
   }
 
-  /*~ get a color from your color palette */
+  /**
+   * color()
+   * get a color from your color palette
+   */
   public color(hue: string, variant: string = 'base'): string {
     const location = 'colors.colorPalette'
     if (
@@ -200,7 +229,10 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
     return value
   }
 
-  /*~ get a color from your brand color palette */
+  /**
+   * brand()
+   * get a color from your brand color palette
+   */
   public brand(color: string): string {
     const location = 'colors.brand'
     this.parentCheck(location)
