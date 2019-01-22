@@ -5546,9 +5546,9 @@ rollup@^0.63.0:
     "@types/estree" "0.0.39"
     "@types/node" "*"
 
-rollup@^0.66.6:
-  version "0.66.6"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.66.6.tgz#ce7d6185beb7acea644ce220c25e71ae03275482"
+rollup@^0.68.2:
+  version "0.68.2"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.68.2.tgz#c26afb5d981ca7a1a32f76087dbde9dad4fcc653"
   dependencies:
     "@types/estree" "0.0.39"
     "@types/node" "*"
