@@ -53,7 +53,7 @@
     "@ngard/tiny-get": "^1.0.1"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.13",
+    "@types/jest": "^24.0.0",
     "@types/prettier": "^1.15.2",
     "@types/rollup": "^0.54.0",
     "@types/typescript": "^2.0.0",
