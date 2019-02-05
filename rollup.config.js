@@ -22,13 +22,6 @@ export default {
       exports: 'named',
       sourcemap: true,
     },
-    {
-      file: pkg.browser,
-      format: 'umd',
-      exports: 'named',
-      sourcemap: true,
-      name: 'design-system-utils',
-    },
   ],
   plugins: [
     typescript(),

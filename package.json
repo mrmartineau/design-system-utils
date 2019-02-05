@@ -3,7 +3,6 @@
   "version": "1.3.0",
   "description": "Design-system utils for working with JS-in-CSS",
   "main": "build/cjs.js",
-  "browser": "build/umd.js",
   "module": "build/es.js",
   "types": "build/index.d.ts",
   "repository": "https://github.com/mrmartineau/design-system-utils",
