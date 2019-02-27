@@ -44,16 +44,16 @@ const DesignSystem1: MySystem = {
         dark: '#d26401',
       },
 
-      v2: {
+      nested: {
         secondary: {
           light: '#fea04c',
           deep: {
             nested: {
               light: '#fea04c',
-            }
-          }
-        }
-      }
+            },
+          },
+        },
+      },
     },
 
     brand: {

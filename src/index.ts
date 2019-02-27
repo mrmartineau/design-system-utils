@@ -222,11 +222,11 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
       throw new Error(MissingParent(location))
     }
 
-    const isMultiPathHue = hue.split('.').length > 1;
+    const isMultiPathHue = hue.split('.').length > 1
 
-    const value: string | undefined = isMultiPathHue ? 
-      this.get(hue, this.ds.colors.colorPalette) : 
-      this.ds.colors.colorPalette[hue][variant]
+    const value: string | undefined = isMultiPathHue
+      ? this.get(hue, this.ds.colors.colorPalette)
+      : this.ds.colors.colorPalette[hue][variant]
 
     if (value === undefined) {
       throw new Error(MissingKey(location, hue, variant))
