@@ -21,7 +21,7 @@ export interface SystemBreakpoints {
 
 export interface SystemColorPalette {
   [name: string]: {
-    [variant: string]: string
+    [variant: string]: string | object
   }
 }
 
