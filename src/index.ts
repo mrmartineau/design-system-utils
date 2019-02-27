@@ -210,6 +210,8 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
   /**
    * color()
    * get a color from your color palette
+   * `hue`: can contain a path to be traversed (eg: 'base.background.light'),
+   * in that case the `variant` argument is ignored
    */
   public color(hue: string, variant: string = 'base'): string {
     const location = 'colors.colorPalette'
@@ -220,7 +222,11 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
       throw new Error(MissingParent(location))
     }
 
-    const value: string | undefined = this.ds.colors.colorPalette[hue][variant]
+    const isMultiPathHue = hue.split('.').length > 1;
+
+    const value: string | undefined = isMultiPathHue ? 
+      this.get(hue, this.ds.colors.colorPalette) : 
+      this.ds.colors.colorPalette[hue][variant]
 
     if (value === undefined) {
       throw new Error(MissingKey(location, hue, variant))

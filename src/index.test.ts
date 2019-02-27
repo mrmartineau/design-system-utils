@@ -228,6 +228,8 @@ describe('design-system-utils methods', () => {
   test('color', () => {
     expect(ds1.color('primary')).toBe('#181830')
     expect(ds1.color('secondary', 'light')).toBe('#fea04c')
+    expect(ds1.color('v2.secondary.light')).toBe('#fea04c')
+    expect(ds1.color('v2.secondary.deep.nested.light')).toBe('#fea04c')
 
     // Errors
     expect(() => ds1.color('text', 'dark')).toThrow(

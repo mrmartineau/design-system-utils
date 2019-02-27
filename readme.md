@@ -353,6 +353,7 @@ This is a short-hand for the `tokens.get()` function.
 // Get values like this:
 tokens.color('bright') // #F9FAFB - the `base` key is the default, so it is not needed
 tokens.color('bright', 'dark')
+tokens.color('background.extra.dark') // Accepts a path (in this case the second `variant` argument is ignored)
 ```
 
 #### `tokens.brand()` - Get brand palette values

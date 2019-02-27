@@ -43,6 +43,17 @@ const DesignSystem1: MySystem = {
         light: '#fea04c',
         dark: '#d26401',
       },
+
+      v2: {
+        secondary: {
+          light: '#fea04c',
+          deep: {
+            nested: {
+              light: '#fea04c',
+            }
+          }
+        }
+      }
     },
 
     brand: {
