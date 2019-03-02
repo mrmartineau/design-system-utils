@@ -9,31 +9,7 @@
 
 </h1>
 
-Design System Utils is a micro framework that standardises your design-system tokens & provides helpful utility functions to access it’s information. It can be used with [styled-components](https://styled-components.com), [emotion](https://emotion.sh), [glamorous](https://glamorous.rocks/) or any other [CSS-in-JS framework](https://css-in-js-playground.com/).
-
-<details>
-  <summary>Table of contents</summary>
-
-- [Install](#install)
-- [Usage](#usage)
-  - [Setting up your design system](#setting-up-your-design-system)
-  - [Initialise the design system framework](#initialise-the-design-system-framework)
-  - [Accessing the design system data in your app](#accessing-the-design-system-data-in-your-app)
-- [Options](#options)
-- [API methods](#api-methods)
-  - [`tokens.get()` - Get any value from the design tokens](#tokensget---get-any-value-from-the-design-tokens)
-  - [`tokens.fontSize()` or `tokens.fs()` - Get font-size values](#tokensfontsize-or-tokensfs---get-font-size-values)
-  - [Color palette](#color-palette)
-    - [`tokens.color()` - Get color palette values](#tokenscolor---get-color-palette-values)
-    - [`tokens.brand()` - Get brand palette values](#tokensbrand---get-brand-palette-values)
-  - [`tokens.bp()` - Get responsive breakpoint values](#tokensbp---get-responsive-breakpoint-values)
-  - [`tokens.z()` - Get `z-index` values](#tokensz---get-z-index-values)
-  - [`tokens.spacing()` or `tokens.space()` - Get spacing values](#tokensspacing-or-tokensspace---get-spacing-values)
-  - [Calculations](#calculations)
-- [Usage with Typescript](#usage-with-typescript)
-- [Demo & examples](#demo--examples)
-
-</details>
+Design System Utils is a micro framework that standardises your design-system tokens & provides helpful utility functions to access the information. It can be used with [styled-components](https://styled-components.com), [emotion](https://emotion.sh), [glamorous](https://glamorous.rocks/) or any other [CSS-in-JS framework](https://css-in-js-playground.com/).
 
 ## Install
 
@@ -50,7 +26,7 @@ npm install --save design-system-utils
 ```
 $ size-limit
 
-  cjs/index.js
+  build/cjs.js
   Package size: 814 B
   Size limit:   1 KB
 
@@ -60,6 +36,45 @@ $ size-limit
 
   With all dependencies, minified and gzipped
 ```
+
+<details>
+  <summary>🤓 Table of contents</summary>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Usage](#usage)
+  - [Setup](#setup)
+  - [Initialise the design system framework](#initialise-the-design-system-framework)
+- [Accessing the design system data in your app](#accessing-the-design-system-data-in-your%C2%A0app)
+- [Options](#options)
+- [Basic API methods](#basic-api-methods)
+  - [`tokens.get()` - Get a token value](#tokensget---get-a-token-value)
+  - [`tokens.set()` - Set a token value](#tokensset---set-a-token-value)
+- [API helper methods](#api-helper-methods)
+  - [`tokens.fontSize()` or `tokens.fs()` - Get font-size values](#tokensfontsize-or-tokensfs---get-font-size-values)
+    - [Modular scale](#modular-scale)
+  - [Color palette](#color-palette)
+    - [`tokens.color()` - Get color palette values](#tokenscolor---get-color-palette-values)
+    - [`tokens.brand()` - Get brand palette values](#tokensbrand---get-brand-palette-values)
+  - [`tokens.bp()` - Get responsive breakpoint values](#tokensbp---get-responsive-breakpoint-values)
+  - [`tokens.z()` - Get `z-index` values](#tokensz---get-z-index-values)
+  - [`tokens.spacing()` or `tokens.space()` - Get spacing values](#tokensspacing-or-tokensspace---get-spacing-values)
+    - [Array example:](#array-example)
+    - [Object example:](#object-example)
+  - [Calculations](#calculations)
+    - [`tokens.multiply()`](#tokensmultiply)
+    - [`pxTo()`](#pxto)
+    - [`toPx()`](#topx)
+    - [`parseUnit()`](#parseunit)
+- [Usage with Typescript](#usage-with-typescript)
+- [Demo & examples](#demo--examples)
+- [Licence](#licence)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+</details>
 
 ## Usage
 
@@ -84,7 +99,7 @@ const designTokens = {...}
 export default new DesignSystem(designTokens)
 ```
 
-### Setting up your design system
+### Setup
 
 The "shape" and structure of your design tokens object **_can_** actually be anything you want, however, if you want to make use of the shortcut/helper methods like `tokens.fontSize|bp|z|color|brand|spacing` etc, there is a particular shape that your data will need to follow, see below:
 
@@ -230,18 +245,44 @@ export default new DesignSystem(myDesignSystem, {
 })
 ```
 
-## API methods
+## Basic API methods
 
-### `tokens.get()` - Get any value from the design tokens
+### `tokens.get()` - Get a token value
 
 The `tokens.get()` function can be used to get any value from the design-system. Use object dot notation to find the value you need from your design system object.
 
 ```js
 // with the system setup, as above
 tokens.get('lineHeight.headings') // 1.1
+tokens.get('a.really.deeply.nested.value')
 ```
 
-There are a few more helper methods to make finding certain values more simple.
+### `tokens.set()` - Set a token value
+
+The `tokens.set()` function can be used to set tokens values. This means you can overwrite existing items, or create new items that are specific to your application.
+
+Like the `.get()` method, use object dot notation to find the value you need from your design system object.
+
+This method uses [dset](https://github.com/lukeed/dset#usage) under the hood, so please read the docs there for more info.
+
+```js
+// with the system setup, as above
+tokens.set('forms.inputBackground', '#fff')
+
+// then use it later like so:
+tokens.get('forms.inputBackground')
+```
+
+## API helper methods
+
+The helper methods make getting values _much_ more simple.
+
+- [`tokens.fontSize()` or `tokens.fs()`](#tokensfontsize-or-tokensfs---get-font-size-values) - Get font-size values
+- [`tokens.color()`](#tokenscolor---get-color-palette-values) - Get color palette values
+- [`tokens.brand()`](#tokensbrand---get-brand-palette-values) - Get brand palette values
+- [`tokens.bp()`](#tokensbp---get-responsive-breakpoint-values) - Get responsive breakpoint values
+- [`tokens.z()`](#tokensz---get-z-index-values) - Get `z-index` values
+- [`tokens.spacing()` or `tokens.space()`](#tokensspacing-or-tokensspace---get-spacing-values) - Get spacing values
 
 ### `tokens.fontSize()` or `tokens.fs()` - Get font-size values
 
@@ -464,7 +505,27 @@ parseUnit('18px') // 'px'
 
 ## Usage with Typescript
 
-Typescript types and interfaces should be imported as named imports. Below is an example where a new item (`baseline`) is added to the `spacing` object.
+Typescript types and interfaces should be imported as named imports.
+
+See all the type definitions in the [types.ts](https://github.com/mrmartineau/design-system-utils/blob/master/src/types.ts) file. Here are all the exported types that can be extended:
+
+```
+{
+  System,
+  SystemOptions,
+  SystemBreakpoints,
+  SystemZIndex,
+  SystemFontSizes,
+  SystemSpacing,
+  SystemScale,
+  SystemColorPalette,
+  SystemBrandPalette,
+  SystemType,
+  SystemOptionalKey,
+}
+```
+
+Below is an example where a new item (`baseline`) is added to the `spacing` object.
 
 ```ts
 import DesignSystem, { System, SystemOptions, SystemSpacing } from '../index'
