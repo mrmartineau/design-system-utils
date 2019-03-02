@@ -1,4 +1,5 @@
 import { get } from '@ngard/tiny-get'
+import set from 'dset'
 import {
   System,
   SystemOptions,
@@ -72,17 +73,6 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
   }
 
   /**
-   * multiply()
-   * multiply a given value
-   */
-  public multiply(initial: any, multiplier: number): number {
-    const initialVal =
-      typeof initial === 'string' ? parseFloat(this.get(initial)) : initial
-
-    return initialVal * multiplier
-  }
-
-  /**
    * get()
    * get any value from the design system object
    */
@@ -91,41 +81,11 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
   }
 
   /**
-   * bp()
-   * get a breakpoint value from the design system object
+   * set()
+   * set any value in the design system object
    */
-  public bp(breakpoint: string): string {
-    const location = 'breakpoints'
-    if (this.get(location, this.ds) === undefined) {
-      throw new Error(MissingParent(location))
-    }
-
-    const value: string | undefined = this.get(breakpoint, this.ds.breakpoints)
-
-    if (value === undefined) {
-      throw new Error(MissingKey(location, breakpoint))
-    }
-
-    return value
-  }
-
-  /**
-   * z()
-   * get a z-index value from the design system object
-   */
-  public z(z: string): string {
-    const location = 'zIndex'
-    if (this.get(location, this.ds) === undefined) {
-      throw new Error(MissingParent(location))
-    }
-
-    const value: string | undefined = this.get(z, this.ds.zIndex)
-
-    if (value === undefined) {
-      throw new Error(MissingKey(location, z))
-    }
-
-    return value
+  public set(location: string, value: any): void {
+    return set(this.ds, location, value)
   }
 
   /**
@@ -250,6 +210,55 @@ export default class DesignSystem<T extends System, K extends SystemOptions> {
     }
 
     return value
+  }
+
+  /**
+   * bp()
+   * get a breakpoint value from the design system object
+   */
+  public bp(breakpoint: string): string {
+    const location = 'breakpoints'
+    if (this.get(location, this.ds) === undefined) {
+      throw new Error(MissingParent(location))
+    }
+
+    const value: string | undefined = this.get(breakpoint, this.ds.breakpoints)
+
+    if (value === undefined) {
+      throw new Error(MissingKey(location, breakpoint))
+    }
+
+    return value
+  }
+
+  /**
+   * z()
+   * get a z-index value from the design system object
+   */
+  public z(z: string): string {
+    const location = 'zIndex'
+    if (this.get(location, this.ds) === undefined) {
+      throw new Error(MissingParent(location))
+    }
+
+    const value: string | undefined = this.get(z, this.ds.zIndex)
+
+    if (value === undefined) {
+      throw new Error(MissingKey(location, z))
+    }
+
+    return value
+  }
+
+  /**
+   * multiply()
+   * multiply a given value
+   */
+  public multiply(initial: any, multiplier: number): number {
+    const initialVal =
+      typeof initial === 'string' ? parseFloat(this.get(initial)) : initial
+
+    return initialVal * multiplier
   }
 
   private parentCheck(loc: string) {

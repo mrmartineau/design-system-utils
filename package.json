@@ -49,7 +49,8 @@
   "author": "Zander Martineau",
   "license": "MIT",
   "dependencies": {
-    "@ngard/tiny-get": "^1.0.1"
+    "@ngard/tiny-get": "^1.0.1",
+    "dset": "^2.0.1"
   },
   "devDependencies": {
     "@types/jest": "^24.0.9",
