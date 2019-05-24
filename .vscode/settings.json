@@ -1,5 +1,6 @@
 {
   "workbench.colorCustomizations": {
-    "statusBar.background": "#91748d"
+    "statusBar.background": "#91748d",
+    "statusBar.foreground": "#fff"
   }
 }
