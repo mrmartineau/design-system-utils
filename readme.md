@@ -69,6 +69,7 @@ $ size-limit
     - [`toPx()`](#topx)
     - [`parseUnit()`](#parseunit)
 - [Usage with Typescript](#usage-with-typescript)
+- [Aliases](#aliases)
 - [Demo & examples](#demo--examples)
 - [Licence](#licence)
 
@@ -550,6 +551,37 @@ const Tokens: MySystem = {
 
 export default new DesignSystem<MySystem, SystemOptions>(Tokens)
 ```
+
+## Aliases
+
+If you'd prefer to rename the above methods, or even add your own getter methods, to access your design tokens, it is very simple. See below for an example:
+
+```js
+export tokens from './tokens' // import your design tokens
+
+// create new alias functions
+
+// this renames .bp()
+export const breakpoints = bp => tokens.bp(bp)
+
+// this adds a new alias that doesn't already exist in Design System Utils
+export const fontWeights = weight => tokens.get('type.fontWeights')
+
+// the aliases can also be for specific values
+export const baseFontSize = ds1.get('type.baseFontSize')
+export const brandPrimary = ds1.brand('red')
+```
+
+Then use them like so:
+
+```js
+import { breakpoints, fontWeights, baseFontSize, brandPrimary } from './tokens'
+
+breakpoints('m')
+fontWeights('normal')
+```
+
+Take a look at [`alias.ts`](https://github.com/mrmartineau/design-system-utils/blob/master/src/alias.ts) and [`alias.test.ts`](https://github.com/mrmartineau/design-system-utils/blob/master/src/alias.test.ts) to see working examples and their usage.
 
 ## Demo & examples
 
