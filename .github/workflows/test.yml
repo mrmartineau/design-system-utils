@@ -1,7 +1,22 @@
-steps:
-- uses: actions/checkout@v1
-- uses: actions/setup-node@v1
-  with:
-    node-version: '10.x'
-- run: npm install
-- run: npm test
+name: Test
+
+on:
+  push:
+    branches:
+    - master
+    - develop
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  test:
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+    - run: yarn install
+    - run: yarn test
+      env:
+        CI: true
