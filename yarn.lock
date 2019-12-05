@@ -6310,10 +6310,22 @@ sisteransi@^1.0.0:
   resolved "https://registry.yarnpkg.com/sisteransi/-/sisteransi-1.0.0.tgz#77d9622ff909080f1c19e5f4a1df0c1b0a27b88c"
   integrity sha512-N+z4pHB4AmUv0SjveWRd6q1Nj5w62m5jodv+GD8lvmbY/83T/rpbJGZOnK5T149OldDj4Db07BSv9xY4K6NTPQ==
 
-size-limit@2.2.1, size-limit@^2.2.1:
+size-limit@2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/size-limit/-/size-limit-2.2.1.tgz#6511471ba0296c9954df919005802d02af818d6d"
   integrity sha512-V6SraFSyRs+JKSTJaZy5etA4ltx/LKE2pTfbMv2ojmgJLA6QwfRGZdYnED5GBzjJs3aIjrqDkmpc0QjIYkNiYg==
+  dependencies:
+    bytes "^3.1.0"
+    chalk "^3.0.0"
+    ci-job-number "^0.3.1"
+    cosmiconfig "^6.0.0"
+    globby "^10.0.1"
+    read-pkg-up "^7.0.0"
+
+size-limit@^2.2.1:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/size-limit/-/size-limit-2.2.2.tgz#292a032cb52545a2bab8dbeef433659a8fd21f3d"
+  integrity sha512-SgKOynIVQ2Y+V7H0k9Lbot4UfB9KTs+jA4Zj9VHMYAOhB3UydZ3yk424aDxSS2FcN9bYNqn39+nOh93lhJcPbQ==
   dependencies:
     bytes "^3.1.0"
     chalk "^3.0.0"
