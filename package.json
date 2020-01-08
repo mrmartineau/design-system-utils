@@ -53,7 +53,7 @@
     "dset": "^2.0.1"
   },
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^2.2.1",
+    "@size-limit/preset-small-lib": "^3.0.0",
     "@types/jest": "^24.0.23",
     "@types/prettier": "^1.18.4",
     "@types/rollup": "^0.54.0",
