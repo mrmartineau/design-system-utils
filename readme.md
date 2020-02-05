@@ -49,10 +49,12 @@ $ size-limit
   - [Initialise the design system framework](#initialise-the-design-system-framework)
 - [Accessing the design system data in your app](#accessing-the-design-system-data-in-your%C2%A0app)
 - [Options](#options)
+  - [Shortcuts](#shortcuts)
+  - [Font Size Unit](#font-size-unit)
 - [Basic API methods](#basic-api-methods)
   - [`tokens.get()` - Get a token value](#tokensget---get-a-token-value)
   - [`tokens.set()` - Set a token value](#tokensset---set-a-token-value)
-- [API helper methods](#api-helper-methods)
+- [Shortcut methods](#shortcut-methods)
   - [`tokens.fontSize()` or `tokens.fs()` - Get font-size values](#tokensfontsize-or-tokensfs---get-font-size-values)
     - [Modular scale](#modular-scale)
   - [Color palette](#color-palette)
@@ -231,7 +233,58 @@ export const Box = styled.div`
 
 ## Options
 
-There is only one option that can be passed to your design system class, it relates to font-sizing:
+Design System Utils comes with a few options. If you are happy with the default, you may not need to modify them.
+
+```js
+// Use default options. do not convert the font-sizes to rems or ems
+export default new DesignSystem(myDesignSystem)
+
+// OR: with custom options
+export default new DesignSystem(myDesignSystem, {
+  shortcuts: {},
+  fontSizeUnit: '',
+})
+```
+
+### Shortcuts
+
+If your tokens object has a different structure, you can remap existing shortcut method _locations_, _names_ or even _create new shortcuts_, (e.g. move the font-size object to the root).
+
+You can also rename existing shortcut methods. This could be useful for non-English speaking languages or you just don't like what I chose originally. Either way, you now have that power.
+
+Renamed shorcuts retain the functionality of the original method.
+New, shortcut methods alias to the `.get()` method.
+
+```js
+export default new DesignSystem(myDesignSystem, {
+  fontSizeUnit: 'rem',
+  shortcuts: {
+    // remap existing location
+    fontSize: 'fontSizes',
+    color: 'colors.colorPalette',
+    brand: 'colors.brandPalette',
+    spacing; 'spacing',
+
+    // rename and remap
+    // you still have to provide the location, even if it is the same
+    bp: {
+      location: 'breakpoints',
+      name: 'breakpoint',
+    },
+
+    z: {
+      location: 'zIndex',
+      name: 'zIndex',
+    },
+
+    // new shortcuts
+    forms: 'forms',
+    motion: 'motion',
+  }
+})
+```
+
+### Font Size Unit
 
 ```js
 // Use default options. do not convert the font-sizes to rems or ems
@@ -274,9 +327,9 @@ tokens.set('forms.inputBackground', '#fff')
 tokens.get('forms.inputBackground')
 ```
 
-## API helper methods
+## Shortcut methods
 
-The helper methods make getting values _much_ more simple.
+The shortcut methods make getting values _much_ more simple. Design System Utils provides a few of the most common
 
 - [`tokens.fontSize()` or `tokens.fs()`](#tokensfontsize-or-tokensfs---get-font-size-values) - Get font-size values
 - [`tokens.color()`](#tokenscolor---get-color-palette-values) - Get color palette values
